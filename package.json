@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/rmassaroni/topdog/issues"
   },
-  "homepage": "https://github.com/rmassaroni/topdog#readme"
+  "homepage": "https://github.com/rmassaroni/topdog#readme",
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
 }
