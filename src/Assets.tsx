@@ -76,3 +76,22 @@ export class Inventory extends Asset {
         return this;
     }
 }
+
+interface CounterState {
+    count: number;
+}
+
+const useCounter = () => {
+    const [state, setState] = useState<CounterState>({ count: 0 });
+
+    const increment = () => setState(prevState => ({ count: prevState.count + 1 }));
+    const decrement = () => setState(prevState => ({ count: prevState.count - 1 }));
+
+    return {
+        state,
+        increment,
+        decrement
+    };
+};
+
+export default useCounter;
