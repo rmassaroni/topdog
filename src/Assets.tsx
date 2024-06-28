@@ -24,12 +24,15 @@ export class Asset {
         return this;
     }
 
-
     USD(): string {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
         }).format(this.value);
+    }
+
+    fullName(): string {
+        return this.name + ': ' + this.USD();
     }
 }
 
@@ -53,5 +56,18 @@ export class Cash extends Asset {
 export class AccountsReceivable extends Asset {
     constructor(value: number) {
         super('Accounts Receivable', value);
+    }
+}
+
+export class Inventory extends Asset {
+    protected quantity: number;
+
+    constructor(value: number) {
+        super('Inventory', value);
+        this.quantity = 1;
+    }
+
+    getQuantity(): number {
+        return this.quantity;
     }
 }
