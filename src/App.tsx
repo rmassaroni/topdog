@@ -47,7 +47,10 @@ const App: React.FC = () => {
         <p>Count: {counter1.count}</p>
         <button onClick={counter1.increment}>Increment</button>
         <button onClick={counter1.decrement}>Decrement</button>
-        <p>{cash.value}</p>
+        <p>{cash.count}</p>
+        <button onClick={cash.increment}>Increment</button>
+        <button onClick={cash.decrement}>Decrement</button>
+
         </div>
     );
 }

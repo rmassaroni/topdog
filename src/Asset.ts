@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import useCounter from './UseCounter';
 
-interface AssetState {
-    value: number;
-    count: number;
-}
-
 const Asset = (initialValue:number = 0, initialCount: number = 0) => {
     // const [count, setCount] = useState<number>(initialCount);
     const { count, increment, decrement } = useCounter(initialCount);
