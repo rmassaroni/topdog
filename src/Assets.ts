@@ -13,10 +13,11 @@ const useCounter = (initialCount: number = 0) => {
     };
 };
 
-const Asset = (initialValue: number = 0, initialCount: number = 0) => {
+//will combine asset and usecounter
+const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: string = 'Asset') => {
     const { count, increment, decrement } = useCounter(initialCount);
     const [ value, setValue ] = useState<number>(initialValue);
-    const [ name, setName ] = useState<string>('Asset');
+    const [ name, setName ] = useState<string>(initialName);
 
     const updateValue = (newValue: number) => {
         setValue(newValue);
@@ -52,9 +53,18 @@ const Asset = (initialValue: number = 0, initialCount: number = 0) => {
 
 const Cash = (initialValue: number = 0, initialCount: number = 0) => {
     return {
-        ...Asset(initialValue, initialCount),
-        name: 'Cash'
+        ...Asset(initialValue, initialCount, 'Cash'),
     }
 }
 
-export { useCounter, Asset, Cash};
+const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0) => {
+    const [ quantity, setQuantity ] = useState<number>(initialQuantity);
+    return {
+        ...Asset(initialValue, initialCount, 'Inventory'),
+        quantity,
+        setQuantity
+    }
+}
+
+
+export { useCounter, Asset, Cash, Inventory };
