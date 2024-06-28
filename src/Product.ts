@@ -19,7 +19,7 @@ export class Product {
         this.value = newValue;
     }
 
-    USD(): string {
+    usd(): string {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -27,7 +27,7 @@ export class Product {
     }
 
     fullName(): string {
-        return `${this.name}: ${this.USD()}`;
+        return `${this.name}: ${this.usd()}`;
     }
 }
 

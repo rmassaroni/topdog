@@ -59,28 +59,36 @@ const Cash = (initialValue: number = 0, initialCount: number = 0) => {
 }
 
 const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0) => {
+    const asset = Asset(initialValue, initialCount, 'Inventory');
     const [ quantity, setQuantity ] = useState<number>(initialQuantity);
-    const [products, setProducts] = useState<Product[]>([]);
+    const [ products, setProducts ] = useState<Product[]>([]);
 
-    const addProduct = (product: Product) => {
-        setProducts(prevProducts => [...prevProducts, product]);
+    const buyProduct = () => {
+        // setProducts(prevProducts => [...prevProducts, product]);
+        setQuantity(prevQ => prevQ + 1);
     };
 
-    const removeProduct = (index: number) => {
-        setProducts(prevProducts => {
-            const updatedProducts = [...prevProducts];
-            updatedProducts.splice(index, 1);
-            return updatedProducts;
-        });
+    const sellProduct = () => {
+        // setProducts(prevProducts => {
+        //     const updatedProducts = [...prevProducts];
+        //     updatedProducts.splice(index, 1);
+        //     return updatedProducts;
+        // });
+        setQuantity(prevQ => prevQ - 1);
+    };
+
+    const fullName = (): string => {
+        return `${asset.fullName()}, quantity: ${quantity}`;
     };
 
     return {
-        ...Asset(initialValue, initialCount, 'Inventory'),
+        ...asset,
         quantity,
         setQuantity,
         products,
-        addProduct,
-        removeProduct
+        buyProduct,
+        sellProduct,
+        fullName
     }
 }
 
