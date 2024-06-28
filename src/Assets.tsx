@@ -19,7 +19,7 @@ export class Asset {
         return this.value;
     }
 
-    setValue(newVal: number): Asset {
+    setValue(newVal: number): this {
         this.value = newVal;
         return this;
     }
@@ -62,12 +62,17 @@ export class AccountsReceivable extends Asset {
 export class Inventory extends Asset {
     protected quantity: number;
 
-    constructor(value: number) {
+    constructor(value: number, quantity: number = 1) {
         super('Inventory', value);
-        this.quantity = 1;
+        this.quantity = quantity;
     }
 
     getQuantity(): number {
         return this.quantity;
+    }
+
+    setQuantity(newQuantity: number): this {
+        this.quantity = newQuantity;
+        return this;
     }
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-import { Cash, AccountsReceivable } from './Assets';
+import { Asset, Cash, AccountsReceivable, Inventory } from './Assets';
 
 
 const App: React.FC = () => {
@@ -15,6 +15,7 @@ const App: React.FC = () => {
 
     const [cash, setCash] = useState<Cash>(new Cash(100.00));
     const [accRec, setAccRec] = useState<AccountsReceivable>(new AccountsReceivable(50));
+    const [inv, setInv] = useState<Inventory>(new Inventory(10, 100));
 
     const [test, setTest] = useState({
         name: 'c',
@@ -24,11 +25,13 @@ const App: React.FC = () => {
     
     return (
         <div>
-            <p>{cash.USD()}</p>
-            <p>{accRec.USD()}</p>
+            <p>{cash.fullName()}</p>
+            <p>{accRec.fullName()}</p>
+            <p>{inv.getQuantity()}</p>
             <p>{test.value}</p>
             <button onClick={() => {
                 setCash(cash.setValue(300.0));
+                setInv(inv.setQuantity(inv.getQuantity() - 1));
 
                 setTest({ ...test, value: 200 }); //other state vars are only updating if this one is updating
             }}>set</button>
