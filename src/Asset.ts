@@ -1,39 +1,36 @@
 import { useState } from 'react';
 import useCounter from './UseCounter';
 
-const Asset = (initialValue:number = 0, initialCount: number = 0) => {
-    // const [count, setCount] = useState<number>(initialCount);
+const Asset = (initialValue: number = 0, initialCount: number = 0) => {
     const { count, increment, decrement } = useCounter(initialCount);
-    const [value, setValue] = useState<number>(initialValue);
+    const [ value, setValue ] = useState<number>(initialValue);
+    const [ name, setName ] = useState<string>('Asset');
 
     const updateValue = (newValue: number) => {
         setValue(newValue);
     };
 
+    const updateName = (newName: string) => {
+        setName(newName);
+    }
+
     return {
+        name,
         value,
         count,
         increment,
         decrement,
-        updateValue
+        updateName,
+        updateValue,
     };
 };
 
-// export default Asset;
-
-
-const Cash = (initialValue:number = 0, initialCount: number = 0, varName: string = 'Cash') => {
-    const { count, increment, decrement, value, updateValue } = Asset(initialValue, initialCount);
-
-    const [name, setName] = useState<string>(varName);
+const Cash = (initialValue:number = 0, initialCount: number = 0) => {
+    // const { count, increment, decrement, name, updateName, value, updateValue } = Asset(initialValue, initialCount);
 
     return {
-        value,
-        count,
-        name,
-        increment,
-        decrement,
-        updateValue
+        ...Asset(initialValue, initialCount),
+        name: 'Cash'
     }
 }
 
