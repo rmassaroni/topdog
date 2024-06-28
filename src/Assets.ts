@@ -1,109 +1,60 @@
-import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-import useCounter from './UseCounter';
+import { useState } from 'react';
 
-export class Asset {
-    protected name: string;
-    protected value: number;
-    // protected counter: { state: { count: number }; increment: () => void; decrement: () => void };
-    // protected counter: { count: number; increment: () => void; decrement: () => void };
+const useCounter = (initialCount: number = 0) => {
+    const [count, setCount] = useState<number>(initialCount);
 
-    // const [v, setV] = useState<number>(0);
+    const increment = () => setCount(prevCount => prevCount + 1);
+    const decrement = () => setCount(prevCount => prevCount - 1);
 
-    constructor(name: string, value: number) {
-        this.name = name;
-        this.value = value;
-        // this.counter = useCounter(10);
+    return {
+        count,
+        increment,
+        decrement
+    };
+};
+
+const Asset = (initialValue: number = 0, initialCount: number = 0) => {
+    const { count, increment, decrement } = useCounter(initialCount);
+    const [ value, setValue ] = useState<number>(initialValue);
+    const [ name, setName ] = useState<string>('Asset');
+
+    const updateValue = (newValue: number) => {
+        setValue(newValue);
+    };
+
+    const updateName = (newName: string) => {
+        setName(newName);
     }
 
-    getName(): string {
-        return this.name;
-    }
-
-    getValue(): number {
-        return this.value;
-    }
-
-    setValue(newVal: number): this {
-        this.value = newVal;
-        return this;
-    }
-
-    USD(): string {
+    const usd = (): string => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(this.value);
+        }).format(value);
     }
 
-    fullName(): string {
-        return this.name + ': ' + this.USD();
+    const fullName = (): string => {
+        return name + ': ' + usd();
     }
 
-    // incrementCounter() {
-    //     this.counter.increment();
-    // }
-    //
-    // decrementCounter() {
-    //     this.counter.decrement();
-    // }
-}
+    return {
+        name,
+        value,
+        count,
+        increment,
+        decrement,
+        updateName,
+        updateValue,
+        usd,
+        fullName
+    };
+};
 
-export class Cash extends Asset {
-    constructor(value: number) {
-        super('Cash', value);
-    }
-    //     constructor(props: { value: number; onUpdate: (newValue: number) => void }) {
-    //     super('Cash', props.value);
-    //     this.onUpdate = props.onUpdate;
-    // }
-    //
-    // private onUpdate: (newValue: number) => void;
-    //
-    // updateValue(newValue: number): void {
-    //     this.setValue(newValue);
-    //     this.onUpdate(newValue);
-    // }
-}
-
-export class AccountsReceivable extends Asset {
-    constructor(value: number) {
-        super('Accounts Receivable', value);
+const Cash = (initialValue: number = 0, initialCount: number = 0) => {
+    return {
+        ...Asset(initialValue, initialCount),
+        name: 'Cash'
     }
 }
 
-export class Inventory extends Asset {
-    protected quantity: number;
-
-    constructor(value: number, quantity: number = 1) {
-        super('Inventory', value);
-        this.quantity = quantity;
-    }
-
-    getQuantity(): number {
-        return this.quantity;
-    }
-
-    setQuantity(newQuantity: number): this {
-        this.quantity = newQuantity;
-        return this;
-    }
-}
-
-// interface CounterState {
-//     count: number;
-// }
-//
-// const useCounter = () => {
-//     const [state, setState] = useState<CounterState>({ count: 0 });
-//
-//     const increment = () => setState(prevState => ({ count: prevState.count + 1 }));
-//     const decrement = () => setState(prevState => ({ count: prevState.count - 1 }));
-//
-//     return {
-//         state,
-//         increment,
-//         decrement
-//     };
-// };
-//
-// export default useCounter;
+export { useCounter, Asset, Cash};
