@@ -34,20 +34,20 @@ export class Asset {
 }
 
 export class Cash extends Asset {
-    // constructor(value: number) {
-    //     super('Cash', value);
+    constructor(value: number) {
+        super('Cash', value);
+    }
+    //     constructor(props: { value: number; onUpdate: (newValue: number) => void }) {
+    //     super('Cash', props.value);
+    //     this.onUpdate = props.onUpdate;
     // }
-        constructor(props: { value: number; onUpdate: (newValue: number) => void }) {
-        super('Cash', props.value);
-        this.onUpdate = props.onUpdate;
-    }
-
-    private onUpdate: (newValue: number) => void;
-
-    updateValue(newValue: number): void {
-        this.setValue(newValue);
-        this.onUpdate(newValue);
-    }
+    //
+    // private onUpdate: (newValue: number) => void;
+    //
+    // updateValue(newValue: number): void {
+    //     this.setValue(newValue);
+    //     this.onUpdate(newValue);
+    // }
 }
 
 export class AccountsReceivable extends Asset {
