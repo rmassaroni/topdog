@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
+import useCounter from './UseCounter';
 
 export class Asset {
     protected name: string;
     protected value: number;
+    // protected counter: { state: { count: number }; increment: () => void; decrement: () => void };
+    // protected counter: { count: number; increment: () => void; decrement: () => void };
 
     // const [v, setV] = useState<number>(0);
 
     constructor(name: string, value: number) {
         this.name = name;
         this.value = value;
+        // this.counter = useCounter(10);
     }
 
     getName(): string {
@@ -34,6 +38,14 @@ export class Asset {
     fullName(): string {
         return this.name + ': ' + this.USD();
     }
+
+    // incrementCounter() {
+    //     this.counter.increment();
+    // }
+    //
+    // decrementCounter() {
+    //     this.counter.decrement();
+    // }
 }
 
 export class Cash extends Asset {
@@ -77,21 +89,21 @@ export class Inventory extends Asset {
     }
 }
 
-interface CounterState {
-    count: number;
-}
-
-const useCounter = () => {
-    const [state, setState] = useState<CounterState>({ count: 0 });
-
-    const increment = () => setState(prevState => ({ count: prevState.count + 1 }));
-    const decrement = () => setState(prevState => ({ count: prevState.count - 1 }));
-
-    return {
-        state,
-        increment,
-        decrement
-    };
-};
-
-export default useCounter;
+// interface CounterState {
+//     count: number;
+// }
+//
+// const useCounter = () => {
+//     const [state, setState] = useState<CounterState>({ count: 0 });
+//
+//     const increment = () => setState(prevState => ({ count: prevState.count + 1 }));
+//     const decrement = () => setState(prevState => ({ count: prevState.count - 1 }));
+//
+//     return {
+//         state,
+//         increment,
+//         decrement
+//     };
+// };
+//
+// export default useCounter;
