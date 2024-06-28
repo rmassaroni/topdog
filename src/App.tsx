@@ -54,6 +54,7 @@ const App: React.FC = () => {
         <button onClick={cash.decrement}>Decrement</button>
 
         <p>{cash2.name}</p>
+        <p>{cash.usd()}</p>
         </div>
     );
 }

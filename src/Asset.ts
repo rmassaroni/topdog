@@ -1,5 +1,17 @@
 import { useState } from 'react';
-import useCounter from './UseCounter';
+
+const useCounter = (initialCount: number = 0) => {
+    const [count, setCount] = useState<number>(initialCount);
+
+    const increment = () => setCount(prevCount => prevCount + 1);
+    const decrement = () => setCount(prevCount => prevCount - 1);
+
+    return {
+        count,
+        increment,
+        decrement
+    };
+};
 
 const Asset = (initialValue: number = 0, initialCount: number = 0) => {
     const { count, increment, decrement } = useCounter(initialCount);
@@ -14,6 +26,17 @@ const Asset = (initialValue: number = 0, initialCount: number = 0) => {
         setName(newName);
     }
 
+    const usd = (): string => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(value);
+    }
+
+    const fullName = (): string => {
+        return name + ': ' + usd();
+    }
+
     return {
         name,
         value,
@@ -22,12 +45,12 @@ const Asset = (initialValue: number = 0, initialCount: number = 0) => {
         decrement,
         updateName,
         updateValue,
+        usd,
+        fullName
     };
 };
 
-const Cash = (initialValue:number = 0, initialCount: number = 0) => {
-    // const { count, increment, decrement, name, updateName, value, updateValue } = Asset(initialValue, initialCount);
-
+const Cash = (initialValue: number = 0, initialCount: number = 0) => {
     return {
         ...Asset(initialValue, initialCount),
         name: 'Cash'
