@@ -10,6 +10,7 @@ const App: React.FC = () => {
     return (
         <div>
             <p>{cash.fullName()}</p>
+            <p>{inv.fullName()}</p>
         </div>
     );
 }

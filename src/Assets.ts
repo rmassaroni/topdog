@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Product } from './Product';
 
 const useCounter = (initialCount: number = 0) => {
     const [count, setCount] = useState<number>(initialCount);
@@ -59,10 +60,27 @@ const Cash = (initialValue: number = 0, initialCount: number = 0) => {
 
 const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0) => {
     const [ quantity, setQuantity ] = useState<number>(initialQuantity);
+    const [products, setProducts] = useState<Product[]>([]);
+
+    const addProduct = (product: Product) => {
+        setProducts(prevProducts => [...prevProducts, product]);
+    };
+
+    const removeProduct = (index: number) => {
+        setProducts(prevProducts => {
+            const updatedProducts = [...prevProducts];
+            updatedProducts.splice(index, 1);
+            return updatedProducts;
+        });
+    };
+
     return {
         ...Asset(initialValue, initialCount, 'Inventory'),
         quantity,
-        setQuantity
+        setQuantity,
+        products,
+        addProduct,
+        removeProduct
     }
 }
 
