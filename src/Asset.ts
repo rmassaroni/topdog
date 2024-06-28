@@ -19,5 +19,22 @@ const Asset = (initialValue:number = 0, initialCount: number = 0) => {
     };
 };
 
-export default Asset;
+// export default Asset;
 
+
+const Cash = (initialValue:number = 0, initialCount: number = 0, varName: string = 'Cash') => {
+    const { count, increment, decrement, value, updateValue } = Asset(initialValue, initialCount);
+
+    const [name, setName] = useState<string>(varName);
+
+    return {
+        value,
+        count,
+        name,
+        increment,
+        decrement,
+        updateValue
+    }
+}
+
+export {Asset, Cash};

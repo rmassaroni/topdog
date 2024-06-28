@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-// interface CounterState {
-//     count: number;
-// }
-
 const useCounter = (initialCount: number = 0) => {
     const [count, setCount] = useState<number>(initialCount);
 

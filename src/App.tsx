@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-import { Cash, AccountsReceivable, Inventory } from './Assets';
+// import { Cash, AccountsReceivable, Inventory } from './Assets';
 import useCounter from './UseCounter';
-import Asset from './Asset';
+import {Asset, Cash} from './Asset';
 
 
 const App: React.FC = () => {
@@ -36,6 +36,8 @@ const App: React.FC = () => {
 
     const cash = Asset(100, 100);
 
+    const cash2 = Cash();
+
     return (
         <div>
         <p>{test.value}</p>
@@ -51,6 +53,7 @@ const App: React.FC = () => {
         <button onClick={cash.increment}>Increment</button>
         <button onClick={cash.decrement}>Decrement</button>
 
+        <p>{cash2.name}</p>
         </div>
     );
 }
