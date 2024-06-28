@@ -12,7 +12,10 @@ const App: React.FC = () => {
             <p>{cash.fullName()}</p>
             <p>{inv.fullName()}</p>
             <button
-                onClick={inv.buyProduct}
+                onClick={() => {
+                    inv.buyProduct();
+                    cash.updateValue(cash.value - 1);
+                }}
             >Buy Product</button>
         </div>
     );
