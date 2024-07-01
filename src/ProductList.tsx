@@ -7,13 +7,12 @@ interface ProductListProps {
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
     return (
-        <div>
-            <h2>Product List</h2>
-            <ul>
-                {products.map((product, index) => (
-                    <li key={index}>{product.getIcon()}</li>
-                ))}
-            </ul>
+        <div className="product-list">
+            {products.map((product, index) => (
+                <div key={index} className="product-square">
+                    {product.getIcon()}
+                </div>
+            ))}
         </div>
     );
 }
