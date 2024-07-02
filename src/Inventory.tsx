@@ -68,7 +68,9 @@ interface InventoryProps {
 }
 
 const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
+    const [manager, setManager] = useState<boolean>(false);
     const [productList, setProductList] = useState(products);
+    const [autoMarkup, setAutoMarkup] = useState<number>(1.05);
 
     const handleBuy = (index: number) => {
         // const newProductList = [...productList];
@@ -78,8 +80,13 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
     };
     return (
         <div>
-            <h2>Inventory</h2>
-                
+            <div style={{ display: "flex" }}>
+                <h2>Inventory</h2>
+                <button onClick={() => setManager(!manager)} style={{ height: "min-content", alignSelf: "center", marginLeft: "15px" }}>Manage</button>
+            </div>
+            {manager &&<div style={{ display: "flex", height: "min-content" }}>
+                <h4>Auto Markup: {autoMarkup}</h4>
+            </div>}
         <div className="product-list">
             {products.map((product, index) => (
                 <div key={index} className="product-square" onClick={() => handleBuy(index)}>
