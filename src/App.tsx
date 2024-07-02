@@ -5,11 +5,12 @@ import { Product } from './Product';
 import ProductList from './ProductList';
 import { Inventory } from './Inventory';
 import { InventoryClass } from './Inventory';
+import { Liability } from './Liabilities';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const inv = InventoryClass();
-    // const inv = Inventory();
+    const ap = Liability(0, 0, 'Accounts Payable');
     
     const startingInventory: Product[] = [
     ];
@@ -24,6 +25,7 @@ const App: React.FC = () => {
     return (
         <div>
             <p>{cash.fullName()}</p>
+            {ap.exists && <p>{ap.fullName()}</p>}
             <Inventory 
                 products={inv.products} 
                 cash={cash}
