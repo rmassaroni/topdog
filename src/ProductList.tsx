@@ -22,16 +22,16 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
                         width: "inherit", 
                         display: "flex", 
                         justifyContent: "space-between", 
-                        fontSize: "small" 
+                        fontSize: "small"
                     }}>
                         <div>{product.getMarketStock()}</div>
                         <div>{product.getInStock()}</div>
                     </div>
                     <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>
-                    <div>{product.usd()}</div>
+                    <div style={{ fontSize: "medium" }}>{product.usd()}</div>
                     <div className="product-info">
                         <div className="popup">
-                        <div className="product-name">{product.getName()}</div>
+                            <div className="product-name">{product.getName()}</div>
                         </div>
                     </div>
                 </div>
