@@ -1,6 +1,18 @@
 import { useState } from 'react';
 import { Product } from './Product';
 
+interface AssetType {
+    name: string;
+    value: number;
+    count: number;
+    increment: () => void;
+    decrement: () => void;
+    updateName: (newName: string) => void;
+    updateValue: (newValue: number) => void;
+    usd: () => string;
+    fullName: () => string;
+}
+
 const useCounter = (initialCount: number = 0) => {
     const [count, setCount] = useState<number>(initialCount);
 
@@ -52,7 +64,7 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
     };
 };
 
-const Cash = (initialValue: number = 0, initialCount: number = 0) => {
+const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => {
     return {
         ...Asset(initialValue, initialCount, 'Cash'),
     }
@@ -92,5 +104,5 @@ const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQu
     }
 }
 
-
+export type { AssetType };
 export { useCounter, Asset, Cash, Inventory };

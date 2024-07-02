@@ -26,7 +26,10 @@ const App: React.FC = () => {
                     cash.updateValue(cash.value - 1);
                 }}
             >Buy Product</button>
-            <ProductList products={products} />
+            <ProductList 
+                products={products} 
+                cash={cash}
+                 />
         </div>
     );
 }
