@@ -1,16 +1,29 @@
 import React from 'react';
 import { Product } from './Product';
+import { useState } from 'react';
 
 interface ProductListProps {
     products: Product[];
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
+    const [productList, setProductList] = useState(products);
+
+    const handleBuy = (index: number) => {
+        const newProductList = [...productList];
+        newProductList[index].buyOne();
+        setProductList(newProductList);
+    };
     return (
         <div className="product-list">
             {products.map((product, index) => (
-                <div key={index} className="product-square">
-                    <div style={{ width: "inherit", display: "flex", justifyContent: "space-between", fontSize: "small" }}>
+                <div key={index} className="product-square" onClick={() => handleBuy(index)}>
+                    <div style={{ 
+                        width: "inherit", 
+                        display: "flex", 
+                        justifyContent: "space-between", 
+                        fontSize: "small" 
+                    }}>
                         <div>{product.getMarketStock()}</div>
                         <div>{product.getInStock()}</div>
                     </div>

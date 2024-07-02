@@ -59,5 +59,12 @@ export class Product {
     setMarketStock(newMarketStock: number): void {
         this.marketStock = newMarketStock;
     }
+
+    buyOne() {
+        if (this.marketStock > 0) {
+            this.marketStock -= 1;
+            this.inStock += 1;
+        }
+    }
 }
 
