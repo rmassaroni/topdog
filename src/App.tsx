@@ -1,13 +1,18 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { useCounter, Asset, Cash, Inventory } from './Assets';
+import { Cash } from './Assets';
 import { Product } from './Product';
 import ProductList from './ProductList';
-
+import { Inventory } from './Inventory';
+import { InventoryClass } from './Inventory';
 
 const App: React.FC = () => {
-    const cash = Cash(100);
-    const inv = Inventory();
+    const cash = Cash(1000);
+    const inv = InventoryClass();
+    // const inv = Inventory();
+    
+    const startingInventory: Product[] = [
+    ];
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -19,17 +24,15 @@ const App: React.FC = () => {
     return (
         <div>
             <p>{cash.fullName()}</p>
-            <p>{inv.fullName()}</p>
-            <button
-                onClick={() => {
-                    inv.buyProduct();
-                    cash.updateValue(cash.value - 1);
-                }}
-            >Buy Product</button>
+            <Inventory 
+                products={inv.products} 
+                cash={cash}
+                />
             <ProductList 
                 products={products} 
                 cash={cash}
-                 />
+                inv={inv}
+            />
         </div>
     );
 }
