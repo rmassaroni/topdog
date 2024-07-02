@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Product } from './Product';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface AssetType {
     name: string;
@@ -11,6 +13,7 @@ interface AssetType {
     updateValue: (newValue: number) => void;
     usd: () => string;
     fullName: () => string;
+    spendCash: (amount: number) => boolean;
 }
 
 const useCounter = (initialCount: number = 0) => {
@@ -65,8 +68,26 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
 };
 
 const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => {
+    const asset = Asset(initialValue, initialCount, 'Cash');
+    const spendCash = (amount: number): boolean => {
+        if (amount > asset.value) {
+            toast.error('Insufficient funds. Acquire a lone.', {
+                position: 'top-right',
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return false;
+        }
+        asset.updateValue(asset.value - amount);
+        return true;
+    }
     return {
-        ...Asset(initialValue, initialCount, 'Cash'),
+        ...asset,
+        spendCash
     }
 }
 

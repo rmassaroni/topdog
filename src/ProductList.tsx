@@ -3,6 +3,8 @@ import { Product } from './Product';
 import { useState } from 'react';
 import { Cash, AssetType } from './Assets';
 import { InventoryClass, InventoryType } from './Inventory';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ProductListProps {
     products: Product[];
@@ -16,10 +18,9 @@ const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
 
     const handleBuy = (index: number) => {
         const newProductList = [...productList];
-        // newProductList[index].buyOne();
-        cash.updateValue(cash.value - newProductList[index].getValue());
-        // marketInv.buyProduct(newProductList[index], -1);
-        inv.buyProduct(newProductList[index], 1);
+        if (cash.spendCash(newProductList[index].getValue())) {
+            inv.buyProduct(newProductList[index], 1);
+        }
         setProductList(newProductList);
     };
     return (
@@ -46,6 +47,7 @@ const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
                     </div>
                 </div>
             ))}
+                <ToastContainer />
         </div>
         </div>
     );

@@ -4,10 +4,12 @@ interface LiabilityType {
     name: string;
     value: number;
     count: number;
+    exists: boolean;
     increment: () => void;
     decrement: () => void;
     updateName: (newName: string) => void;
     updateValue: (newValue: number) => void;
+    updateExists: (newExists: boolean) => void;
     usd: () => string;
     fullName: () => string;
 }
@@ -71,7 +73,7 @@ const Liability = (initialValue: number = 0, initialCount: number = 0, initialNa
 
 const AccountsPayable = (initialValue: number = 0, initialCount: number = 0): LiabilityType => {
     return {
-        ...Liability(initialValue, initialCount, 'Cash'),
+        ...Liability(initialValue, initialCount, 'Accounts Payable'),
     }
 }
 

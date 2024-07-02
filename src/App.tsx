@@ -5,15 +5,12 @@ import { Product } from './Product';
 import ProductList from './ProductList';
 import { Inventory } from './Inventory';
 import { InventoryClass } from './Inventory';
-import { Liability } from './Liabilities';
+import { AccountsPayable } from './Liabilities';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const inv = InventoryClass();
-    const ap = Liability(0, 0, 'Accounts Payable');
-    
-    const startingInventory: Product[] = [
-    ];
+    const ap = AccountsPayable(0, 0);
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -21,11 +18,18 @@ const App: React.FC = () => {
         new Product('Product C', 100),
     ];
 
+    const handleLoan = (loanAmount: number = 100) => {
+        cash.updateValue(cash.value + loanAmount);
+        ap.updateValue(ap.value + loanAmount);
+        ap.updateExists(true);
+    }
+        
 
     return (
         <div>
             <p>{cash.fullName()}</p>
             {ap.exists && <p>{ap.fullName()}</p>}
+            <button onClick={() => handleLoan(100)}>Acquire Loan for $100</button>
             <Inventory 
                 products={inv.products} 
                 cash={cash}
