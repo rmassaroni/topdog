@@ -116,6 +116,7 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
                     }}>
                         <div>{product.usd(product.getMarketValue())}</div>
                         <div>{product.getInStock()}</div>
+                            <div>{product.getDemand(product.getValue()*(1+autoMarkup)).toFixed(2)}</div>
                     </div>
                         <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>
                         <div style={{ fontSize: "medium", color: product.getValue() * (1 + autoMarkup) > product.getValue() ? "green" 
@@ -127,9 +128,14 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
                                 <div className="product-name">{product.getName()}</div>
                             </div>
                         </div>
+                        <div className="product-info" style={{ transform: "translate(0%, -50%)"}}>
+                            <div className="popup">
+                                <div className="product-name">{product.getName()}</div>
+                            </div>
+                        </div>
                     </div>
-            ))}
-        </div>
+                ))}
+            </div>
         </div>
     );
 }

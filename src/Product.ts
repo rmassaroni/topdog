@@ -6,6 +6,7 @@ export class Product {
     private marketStock: number;
     private marketValue: number;
     private demand: number;
+    private demandedPrice: number;
 
     constructor(name: string, value: number) {
         this.name = name;
@@ -15,6 +16,7 @@ export class Product {
         this.marketStock = 1000;
         this.marketValue = value;
         this.demand = 0;
+        this.demandedPrice = this.marketValue;
     }
 
     getName(): string {
@@ -75,8 +77,13 @@ export class Product {
         return this.marketValue;
     }
 
-    getDemand(): number {
-        return this.demand;
+    getDemand(price: number = this.value): number {
+        if (price <= this.marketValue) {
+            return 1;
+        } else {
+            const demand: number = 1 * Math.pow(1 - (price - this.marketValue) / this.marketValue, 2);
+            return Math.max(demand, 0);
+        }
     }
 }
 
