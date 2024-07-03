@@ -5,6 +5,7 @@ export class Product {
     private inStock: number;
     private marketStock: number;
     private marketValue: number;
+    private demand: number;
 
     constructor(name: string, value: number) {
         this.name = name;
@@ -13,6 +14,7 @@ export class Product {
         this.inStock = 0;
         this.marketStock = 1000;
         this.marketValue = value;
+        this.demand = 0;
     }
 
     getName(): string {
@@ -71,6 +73,10 @@ export class Product {
 
     getMarketValue(): number {
         return this.marketValue;
+    }
+
+    getDemand(): number {
+        return this.demand;
     }
 }
 
