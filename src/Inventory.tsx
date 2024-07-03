@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
 import { Asset, Cash, AssetType } from './Assets';
+import { toast } from 'react-toastify';
 
 interface InventoryType {
     quantity: number;
@@ -72,10 +73,17 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
         if (product.getInStock() > 0) {
             product.setInStock(product.getInStock() - 1);
             product.setMarketStock(product.getMarketStock() + 1);
-            // cash.set(cash.getCount() + product.getValue()*(1+autoMarkup));
             cash.updateValue(cash.value + product.getValue()*(1+autoMarkup));
+            toast.info(`Sold ${product.getName()} for ${product.usd(product.getValue()*(1+autoMarkup))}`, {
+                position: 'top-right',
+                autoClose: 1000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
-    
     };
 
 
