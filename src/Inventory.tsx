@@ -84,6 +84,10 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
                 progress: undefined,
             });
         }
+
+        if (product.getInStock() === 0) {
+            products.splice(index, 1);
+        }
     };
 
 
