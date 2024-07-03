@@ -24,7 +24,7 @@ const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
         setProductList(newProductList);
     };
     return (
-        <div>
+        <div style={{ marginLeft: "10px" }}>
             <h2>Market</h2>
         <div className="product-list">
             {productList.map((product, index) => (

@@ -12,8 +12,6 @@ interface InventoryType {
     fullName: () => string;
 }
 
-
-
 const InventoryClass = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0, initialProducts: Product[] = []) => {
     const asset = Asset(initialValue, initialCount, 'Inventory');
     const [ quantity, setQuantity ] = useState<number>(initialQuantity);
@@ -68,20 +66,15 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
     const [productList, setProductList] = useState(products);
     const [autoMarkup, setAutoMarkup] = useState<number>(1.05);
 
-    const handleBuy = (index: number) => {
-        // const newProductList = [...productList];
-        // newProductList[index].buyOne();
-        // cash.updateValue(cash.value - newProductList[index].getValue());
-        // setProductList(newProductList);
-    };
+    const handleBuy = (index: number) => {};
     return (
-        <div>
+        <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
-                <h2>Inventory</h2>
+                <h2 style={{ marginBottom: "10px" }}>Inventory</h2>
                 <button onClick={() => setManager(!manager)} style={{ height: "min-content", alignSelf: "center", marginLeft: "15px" }}>Manage</button>
             </div>
-            {manager &&<div style={{ display: "flex", height: "min-content" }}>
-                <h4>Auto Markup: {autoMarkup}</h4>
+            {manager &&<div className="manager-div" >
+                <h4 style={{ marginTop: "5px", marginBottom: "10px" }}>Auto Markup: {autoMarkup}</h4>
             </div>}
         <div className="product-list">
             {products.map((product, index) => (

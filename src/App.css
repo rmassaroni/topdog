@@ -103,3 +103,8 @@
     visibility: visible;
     opacity: 1;
 }
+
+.manager-div {
+    display: flex;
+    height: min-content;
+}
