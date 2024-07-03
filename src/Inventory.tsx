@@ -20,10 +20,7 @@ const InventoryClass = (initialValue: number = 0, initialCount: number = 0, init
     const [ products, setProducts ] = useState<Product[]>(initialProducts);
 
     const buyProduct = (p: Product, q: number = 1) => {
-        // setProducts(prevProducts => [...prevProducts, p]);
-        // setQuantity(prevQ => prevQ + 1);
         const existingProduct = products.find(product => product.getName() === p.getName());
-
         if (existingProduct) {
             existingProduct.setInStock(existingProduct.getInStock() + q);
             existingProduct.setMarketStock(existingProduct.getMarketStock() - q);
@@ -31,7 +28,6 @@ const InventoryClass = (initialValue: number = 0, initialCount: number = 0, init
             setProducts(prevProducts => [...prevProducts, p]);
             p.setInStock(p.getInStock() + q);
             p.setMarketStock(p.getMarketStock() - q);
-
         }
 
         setQuantity(prevQ => prevQ + q);
