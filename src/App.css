@@ -108,3 +108,35 @@
     display: flex;
     height: min-content;
 }
+
+.markup-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    padding: 0 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.markup-container button,
+  .markup-container input {
+    background: none;
+    border: none;
+    font-size: medium;
+  }
+
+  .markup-container button {
+    cursor: pointer;
+  }
+
+  .markup-container input {
+    flex-grow: 1;
+    text-align: center;
+    border: none;
+    outline: none;
+    margin: 0 10px;
+    width: 25px;
+  }

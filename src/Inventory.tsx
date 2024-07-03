@@ -64,17 +64,22 @@ interface InventoryProps {
 const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
     const [manager, setManager] = useState<boolean>(false);
     const [productList, setProductList] = useState(products);
-    const [autoMarkup, setAutoMarkup] = useState<number>(1.05);
+    const [autoMarkup, setAutoMarkup] = useState<number>(0.05);
 
     const handleBuy = (index: number) => {};
     return (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
-                <h2 style={{ marginBottom: "10px" }}>Inventory</h2>
+                <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>Inventory</h2>
                 <button onClick={() => setManager(!manager)} style={{ height: "min-content", alignSelf: "center", marginLeft: "15px" }}>Manage</button>
             </div>
             {manager &&<div className="manager-div" >
-                <h4 style={{ marginTop: "5px", marginBottom: "10px" }}>Auto Markup: {autoMarkup}</h4>
+                <h4 style={{ marginTop: "5px", marginBottom: "10px", paddingRight: "10px" }}>Auto Markup: </h4>
+                <div className="markup-container">
+                    <button onClick={() => setAutoMarkup(autoMarkup-0.05)}>-</button>
+                    <input type="text" value={autoMarkup.toFixed(2)}></input>
+                    <button onClick={() => setAutoMarkup(autoMarkup+0.05)}>+</button>
+                </div>
             </div>}
         <div className="product-list">
             {products.map((product, index) => (
@@ -88,14 +93,17 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
                         <div>{product.getMarketStock()}</div>
                         <div>{product.getInStock()}</div>
                     </div>
-                    <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>
-                    <div style={{ fontSize: "medium" }}>{product.usd()}</div>
-                    <div className="product-info">
-                        <div className="popup">
-                            <div className="product-name">{product.getName()}</div>
+                        <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>
+                        <div style={{ fontSize: "medium", color: product.getValue() * (1 + autoMarkup) > product.getValue() ? "green" 
+                            : product.getValue() * (1 + autoMarkup) < product.getValue()
+                                ? "red"
+                                : "black"}}>{product.usd(product.getValue()*(1+autoMarkup))}</div>
+                        <div className="product-info">
+                            <div className="popup">
+                                <div className="product-name">{product.getName()}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
             ))}
         </div>
         </div>

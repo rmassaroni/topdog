@@ -4,6 +4,7 @@ export class Product {
     private icon: string;
     private inStock: number;
     private marketStock: number;
+    private marketValue: number;
 
     constructor(name: string, value: number) {
         this.name = name;
@@ -11,6 +12,7 @@ export class Product {
         this.icon = '🍔';
         this.inStock = 0;
         this.marketStock = 1000;
+        this.marketValue = value;
     }
 
     getName(): string {
@@ -25,11 +27,11 @@ export class Product {
         this.value = newValue;
     }
 
-    usd(): string {
+    usd(num: number = this.value): string {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(this.value);
+        }).format(num);
     }
 
     fullName(): string {
@@ -65,6 +67,10 @@ export class Product {
             this.marketStock -= 1;
             this.inStock += 1;
         }
+    }
+
+    getMarketValue(): number {
+        return this.marketValue;
     }
 }
 
