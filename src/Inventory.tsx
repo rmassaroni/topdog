@@ -65,8 +65,20 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
     const [manager, setManager] = useState<boolean>(false);
     const [productList, setProductList] = useState(products);
     const [autoMarkup, setAutoMarkup] = useState<number>(0.05);
+    const [autoSell, setAutoSell] = useState<boolean>(false);
 
-    const handleBuy = (index: number) => {};
+    const handleSell = (index: number) => {
+        const product = products[index];
+        if (product.getInStock() > 0) {
+            product.setInStock(product.getInStock() - 1);
+            product.setMarketStock(product.getMarketStock() + 1);
+            // cash.set(cash.getCount() + product.getValue()*(1+autoMarkup));
+            cash.updateValue(cash.value + product.getValue()*(1+autoMarkup));
+        }
+    
+    };
+
+
     return (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
@@ -83,14 +95,14 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
             </div>}
         <div className="product-list">
             {products.map((product, index) => (
-                <div key={index} className="product-square" onClick={() => handleBuy(index)}>
+                <div key={index} className="product-square" onClick={() => handleSell(index)}>
                     <div style={{ 
                         width: "inherit", 
                         display: "flex", 
                         justifyContent: "space-between", 
                         fontSize: "small"
                     }}>
-                        <div>{product.getMarketStock()}</div>
+                        <div>{product.usd(product.getMarketValue())}</div>
                         <div>{product.getInStock()}</div>
                     </div>
                         <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>

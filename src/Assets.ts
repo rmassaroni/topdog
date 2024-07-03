@@ -13,7 +13,7 @@ interface AssetType {
     updateValue: (newValue: number) => void;
     usd: () => string;
     fullName: () => string;
-    spendCash: (amount: number) => boolean;
+    spendCash: (amount: number, object: string) => boolean;
 }
 
 const useCounter = (initialCount: number = 0) => {
@@ -43,11 +43,11 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
         setName(newName);
     }
 
-    const usd = (): string => {
+    const usd = (num: number = value): string => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-        }).format(value);
+        }).format(num);
     }
 
     const fullName = (): string => {
@@ -69,9 +69,9 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
 
 const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => {
     const asset = Asset(initialValue, initialCount, 'Cash');
-    const spendCash = (amount: number): boolean => {
+    const spendCash = (amount: number, object: string = ''): boolean => {
         if (amount > asset.value) {
-            toast.error('Insufficient funds. Acquire a lone.', {
+            toast.error('Insufficient funds. Liquidate or acquire a lone.', {
                 position: 'top-right',
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -82,6 +82,17 @@ const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => 
             });
             return false;
         }
+        // toast.info('Purchased ' + {object != null ? object : ''} + ' for ' + amount, {
+        toast.info(`Purchased ${object != null ? object : ''} for ${asset.usd(amount)}`, {
+            position: 'top-right',
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        
         asset.updateValue(asset.value - amount);
         return true;
     }

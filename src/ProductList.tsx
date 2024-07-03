@@ -18,7 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
 
     const handleBuy = (index: number) => {
         const newProductList = [...productList];
-        if (cash.spendCash(newProductList[index].getValue())) {
+        if (cash.spendCash(newProductList[index].getValue(), newProductList[index].getName())) {
             inv.buyProduct(newProductList[index], 1);
         }
         setProductList(newProductList);
