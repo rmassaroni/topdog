@@ -52,7 +52,7 @@ const InventoryClass = (initialValue: number = 0, initialCount: number = 0, init
         products,
         buyProduct,
         sellProduct,
-        fullName
+        fullName,
     }
 }
 
@@ -67,6 +67,7 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
     const [productList, setProductList] = useState(products);
     const [autoMarkup, setAutoMarkup] = useState<number>(0.05);
     const [autoSell, setAutoSell] = useState<boolean>(false);
+    const [ capacity, setCapacity ] = useState<number>(20);
 
     const handleSell = (index: number) => {
         const product = products[index];
@@ -90,12 +91,23 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
         }
     };
 
+    const getTotalStock = (): number => {
+        let totalStock: number = 0;
+        for (let product of products) {
+            totalStock += product.getInStock();
+        }
+        return totalStock;
+    }
+
 
     return (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
                 <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>Inventory</h2>
                 <button onClick={() => setManager(!manager)} style={{ height: "min-content", alignSelf: "center", marginLeft: "15px" }}>Manage</button>
+                <h4 style={{ marginLeft: "15px", marginTop: "10px", marginBottom: "10px", alignContent: "center" }}>Capacity: {capacity}</h4>
+                <h4 style={{ marginLeft: "15px", marginTop: "10px", marginBottom: "10px", alignContent: "center" }}>Total Stock: {getTotalStock()}</h4>
+                <h4 style={{ marginLeft: "15px", marginTop: "10px", marginBottom: "10px", alignContent: "center" }}>Available Capacity: {capacity - getTotalStock()}</h4>
             </div>
             {manager &&<div className="manager-div" >
                 <h4 style={{ marginTop: "5px", marginBottom: "10px", paddingRight: "10px" }}>Auto Markup: </h4>
