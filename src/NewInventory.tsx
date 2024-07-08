@@ -3,66 +3,98 @@ import { Product } from './Product';
 import { useState } from 'react';
 import { Asset, Cash, AssetType } from './Assets';
 import { toast } from 'react-toastify';
-
-interface InventoryType {
-    quantity: number;
-    setQuantity: (q: number) => void;
+ type NewInventoryType = {
     products: Product[];
-    buyProduct: (p: Product, q: number) => void;
-    sellProduct: () => void;
+    buy: (product: Product, quantity: number) => void;
     fullName: () => string;
+    component: () => JSX.Element;
 }
 
-const InventoryClass = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0, initialProducts: Product[] = []) => {
-    const asset = Asset(initialValue, initialCount, 'Inventory');
-    const [ quantity, setQuantity ] = useState<number>(initialQuantity);
-    const [ products, setProducts ] = useState<Product[]>(initialProducts);
 
-    const buyProduct = (p: Product, q: number = 1) => {
-        const existingProduct = products.find(product => product.getName() === p.getName());
-        if (existingProduct) {
-            existingProduct.setInStock(existingProduct.getInStock() + q);
-            existingProduct.setMarketStock(existingProduct.getMarketStock() - q);
-        } else {
-            setProducts(prevProducts => [...prevProducts, p]);
-            p.setInStock(p.getInStock() + q);
-            p.setMarketStock(p.getMarketStock() - q);
-        }
-        setQuantity(prevQ => prevQ + q);
-    };
-
-    const sellProduct = () => {
-        setQuantity(prevQ => prevQ - 1);
-    };
-
-    const fullName = (): string => {
-        return `${asset.fullName()}, quantity: ${quantity}`;
-    };
-
-    return {
-        ...asset,
-        quantity,
-        setQuantity,
-        products,
-        buyProduct,
-        sellProduct,
-        fullName,
-    }
-}
+// export class NewInventory {
+//     private quantity: number;
+//     private products: Product[];
+//
+//     constructor(initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0, initialProducts: Product[] = []) {
+//         this.quantity = initialQuantity;
+//         this.products = initialProducts;
+//     }
+//
+//     buyProduct(p: Product, q: number = 1): void {
+//         const existingProduct = this.products.find(product => product.getName() === p.getName());
+//         if (existingProduct) {
+//             existingProduct.setInStock(existingProduct.getInStock() + q);
+//             existingProduct.setMarketStock(existingProduct.getMarketStock() - q);
+//         } else {
+//             this.products.push(p);
+//             p.setInStock(p.getInStock() + q);
+//             p.setMarketStock(p.getMarketStock() - q);
+//         }
+//         this.quantity += q;
+//     }
+//
+//     sellProduct(): void {
+//         this.quantity -= 1;
+//     }
+// }
 
 interface InventoryProps {
-    products: Product[];
+    initialValue?: number;
+    initialProducts?: Product[];
     cash: AssetType;
 }
 
-const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
+// const NewInventory: React.FC<InventoryProps> = ({
+//    initialValue = 0,
+    // initialProducts = [],
+    // cash
+const NewInventory = (initialValue: number = 0, initialProducts: Product[] = [], cash: AssetType ) => {
+    const name: string = 'Inventory';
+    const [ totalValue, setTotalValue ] = useState<number>(initialValue);
+    const [ products, setProducts ] = useState<Product[]>(initialProducts);
     const [manager, setManager] = useState<boolean>(false);
-    const [productList, setProductList] = useState(products);
     const [autoMarkup, setAutoMarkup] = useState<number>(0.05);
     const [autoSell, setAutoSell] = useState<boolean>(false);
     const [ capacity, setCapacity ] = useState<number>(20);
 
-    const handleSell = (index: number) => {
+    const usd = (num: number = totalValue): string => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(num);
+    }
+
+    const fullName = (): string => {
+        return name + ': ' + usd();
+    }
+
+    const getTotalStock = (): number => {
+        return products.reduce((total, product) => total + product.getInStock(), 0);
+    }
+
+    const buy = (product: Product, quantity: number = 1) => {
+        const existingProduct = products.find(p => p.getName() === product.getName());
+        if (existingProduct) {
+            existingProduct.setInStock(existingProduct.getInStock() + quantity);
+            existingProduct.setMarketStock(existingProduct.getMarketStock() - quantity);
+        } else {
+            setProducts(prevProducts => [...prevProducts, product]);
+            product.setInStock(product.getInStock() + quantity);
+            product.setMarketStock(product.getMarketStock() - quantity);
+        }
+        setTotalValue(totalValue + product.getValue()*quantity);
+        toast.info(`Bought ${product.getName()} for ${product.usd(product.getValue()*quantity)}`, {
+            position: 'top-right',
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
+    const sell = (index: number) => {
         const product = products[index];
         if (product.getInStock() > 0) {
             product.setInStock(product.getInStock() - 1);
@@ -84,15 +116,8 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
         }
     };
 
-    const getTotalStock = (): number => {
-        let totalStock: number = 0;
-        for (let product of products) {
-            totalStock += product.getInStock();
-        }
-        return totalStock;
-    }
-
-    return (
+    const component = () => {
+        return (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
                 <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>Inventory</h2>
@@ -111,7 +136,7 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
             </div>}
         <div className="product-list">
             {products.map((product, index) => (
-                <div key={index} className="product-square" onClick={() => handleSell(index)}>
+                <div key={index} className="product-square" onClick={() => sell(index)}>
                     <div style={{ 
                         width: "inherit", 
                         display: "flex", 
@@ -141,10 +166,19 @@ const Inventory: React.FC<InventoryProps> = ({ products, cash }) => {
                 ))}
             </div>
         </div>
-    );
-}
+    )};
+   return {
+        // ...asset,
+        // quantity,
+        // setQuantity,
+        products,
+        // buyProduct,
+        // sellProduct,
+        buy,
+        fullName,
+        component,
+    }
+};
 
-// export default Inventory;
-export type { InventoryType };
-export { Inventory, InventoryClass};
-
+export type { NewInventoryType };
+export { NewInventory};

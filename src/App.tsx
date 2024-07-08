@@ -6,11 +6,13 @@ import ProductList from './ProductList';
 import { Inventory } from './Inventory';
 import { InventoryClass } from './Inventory';
 import { AccountsPayable } from './Liabilities';
+import { NewInventory } from './NewInventory';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const inv = InventoryClass();
     const ap = AccountsPayable(0, 0);
+    const newInv = NewInventory(0, [], cash);
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -38,7 +40,9 @@ const App: React.FC = () => {
                 products={products} 
                 cash={cash}
                 inv={inv}
+                newInv={newInv}
             />
+            {newInv.component()}
         </div>
     );
 }

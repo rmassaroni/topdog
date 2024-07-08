@@ -5,14 +5,16 @@ import { Cash, AssetType } from './Assets';
 import { InventoryClass, InventoryType } from './Inventory';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { NewInventory, NewInventoryType } from './NewInventory';
 
 interface ProductListProps {
     products: Product[];
     cash: AssetType;
     inv: InventoryType;
+    newInv: NewInventoryType;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
+const ProductList: React.FC<ProductListProps> = ({ products, cash, inv, newInv}) => {
     // const marketInv = InventoryClass(0, 0, 0, products);
     const [productList, setProductList] = useState(products);
 
@@ -20,6 +22,7 @@ const ProductList: React.FC<ProductListProps> = ({ products, cash, inv }) => {
         const newProductList = [...productList];
         if (cash.spendCash(newProductList[index].getValue(), newProductList[index].getName())) {
             inv.buyProduct(newProductList[index], 1);
+            newInv.buy(newProductList[index], 1);
         }
         setProductList(newProductList);
     };
