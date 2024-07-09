@@ -1,15 +1,16 @@
 import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
-import { Asset, Cash, AssetType } from './Assets';
+import { Asset, Cash } from './Assets';
 import { toast } from 'react-toastify';
+import { AssetType } from './types';
 
-type InventoryType = {
-    products: Product[];
-    buy: (product: Product, quantity: number) => void;
-    fullName: () => string;
-    component: () => JSX.Element;
-}
+// type InventoryType = {
+//     products: Product[];
+//     buy: (product: Product, quantity: number) => void;
+//     fullName: () => string;
+//     component: () => JSX.Element;
+// }
 
 interface InventoryProps {
     initialValue?: number;
@@ -149,5 +150,5 @@ const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], ca
     }
 };
 
-export type { InventoryType };
+// export type { InventoryType };
 export { Inventory };

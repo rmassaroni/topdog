@@ -1,10 +1,10 @@
 import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
-import { Cash, AssetType } from './Assets';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Inventory, InventoryType } from './Inventory';
+import { Inventory } from './Inventory';
+import { AssetType, InventoryType } from './types';
 
 interface MarketProps {
     products: Product[];

@@ -2,19 +2,20 @@ import { useState } from 'react';
 import { Product } from './Product';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AssetType } from './types';
 
-interface AssetType {
-    name: string;
-    value: number;
-    count: number;
-    increment: () => void;
-    decrement: () => void;
-    updateName: (newName: string) => void;
-    updateValue: (newValue: number) => void;
-    usd: () => string;
-    fullName: () => string;
-    spendCash: (amount: number, object: string) => boolean;
-}
+// interface AssetType {
+//     name: string;
+//     value: number;
+//     count: number;
+//     increment: () => void;
+//     decrement: () => void;
+//     updateName: (newName: string) => void;
+//     updateValue: (newValue: number) => void;
+//     usd: () => string;
+//     fullName: () => string;
+//     spendCash: (amount: number, object: string) => boolean;
+// }
 
 const useCounter = (initialCount: number = 0) => {
     const [count, setCount] = useState<number>(initialCount);
@@ -136,5 +137,5 @@ const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQu
     }
 }
 
-export type { AssetType };
+// export type { AssetType };
 export { useCounter, Asset, Cash, Inventory };
