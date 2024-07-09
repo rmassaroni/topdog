@@ -2,14 +2,14 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Cash } from './Assets';
 import { Product } from './Product';
-import ProductList from './ProductList';
+import Market from './Market';
 import { AccountsPayable } from './Liabilities';
 import { Inventory } from './Inventory';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const ap = AccountsPayable(0, 0);
-    const newInv = Inventory(0, [], cash);
+    const inv = Inventory(0, [], cash);
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -22,18 +22,17 @@ const App: React.FC = () => {
         ap.updateValue(ap.value + loanAmount);
         ap.updateExists(true);
     }
-        
 
     return (
         <div>
             <p>{cash.fullName()}</p>
             {ap.exists && <p>{ap.fullName()}</p>}
             <button onClick={() => handleLoan(100)}>Acquire Loan for $100</button>
-            {newInv.component()}
-            <ProductList 
+            {inv.component()}
+            <Market 
                 products={products} 
                 cash={cash}
-                newInv={newInv}
+                inv={inv}
             />
         </div>
     );
