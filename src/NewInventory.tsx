@@ -181,4 +181,4 @@ const NewInventory = (initialValue: number = 0, initialProducts: Product[] = [],
 };
 
 export type { NewInventoryType };
-export { NewInventory};
+export { NewInventory };

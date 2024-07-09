@@ -2,7 +2,7 @@ import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
 import { Cash, AssetType } from './Assets';
-import { InventoryClass, InventoryType } from './Inventory';
+// import { InventoryClass, InventoryType } from './Inventory';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NewInventory, NewInventoryType } from './NewInventory';
@@ -10,18 +10,18 @@ import { NewInventory, NewInventoryType } from './NewInventory';
 interface ProductListProps {
     products: Product[];
     cash: AssetType;
-    inv: InventoryType;
+    // inv: InventoryType;
     newInv: NewInventoryType;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products, cash, inv, newInv}) => {
+const ProductList: React.FC<ProductListProps> = ({ products, cash, newInv}) => {
     // const marketInv = InventoryClass(0, 0, 0, products);
     const [productList, setProductList] = useState(products);
 
     const handleBuy = (index: number) => {
         const newProductList = [...productList];
         if (cash.spendCash(newProductList[index].getValue(), newProductList[index].getName())) {
-            inv.buyProduct(newProductList[index], 1);
+            // inv.buyProduct(newProductList[index], 1);
             newInv.buy(newProductList[index], 1);
         }
         setProductList(newProductList);
