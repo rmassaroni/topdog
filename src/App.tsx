@@ -4,12 +4,12 @@ import { Cash } from './Assets';
 import { Product } from './Product';
 import ProductList from './ProductList';
 import { AccountsPayable } from './Liabilities';
-import { NewInventory } from './NewInventory';
+import { Inventory } from './Inventory';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const ap = AccountsPayable(0, 0);
-    const newInv = NewInventory(0, [], cash);
+    const newInv = Inventory(0, [], cash);
 
     const products: Product[] = [
         new Product('Product A', 50),

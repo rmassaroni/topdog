@@ -3,40 +3,13 @@ import { Product } from './Product';
 import { useState } from 'react';
 import { Asset, Cash, AssetType } from './Assets';
 import { toast } from 'react-toastify';
- type NewInventoryType = {
+
+type InventoryType = {
     products: Product[];
     buy: (product: Product, quantity: number) => void;
     fullName: () => string;
     component: () => JSX.Element;
 }
-
-
-// export class NewInventory {
-//     private quantity: number;
-//     private products: Product[];
-//
-//     constructor(initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0, initialProducts: Product[] = []) {
-//         this.quantity = initialQuantity;
-//         this.products = initialProducts;
-//     }
-//
-//     buyProduct(p: Product, q: number = 1): void {
-//         const existingProduct = this.products.find(product => product.getName() === p.getName());
-//         if (existingProduct) {
-//             existingProduct.setInStock(existingProduct.getInStock() + q);
-//             existingProduct.setMarketStock(existingProduct.getMarketStock() - q);
-//         } else {
-//             this.products.push(p);
-//             p.setInStock(p.getInStock() + q);
-//             p.setMarketStock(p.getMarketStock() - q);
-//         }
-//         this.quantity += q;
-//     }
-//
-//     sellProduct(): void {
-//         this.quantity -= 1;
-//     }
-// }
 
 interface InventoryProps {
     initialValue?: number;
@@ -44,11 +17,7 @@ interface InventoryProps {
     cash: AssetType;
 }
 
-// const NewInventory: React.FC<InventoryProps> = ({
-//    initialValue = 0,
-    // initialProducts = [],
-    // cash
-const NewInventory = (initialValue: number = 0, initialProducts: Product[] = [], cash: AssetType ) => {
+const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], cash: AssetType ) => {
     const name: string = 'Inventory';
     const [ totalValue, setTotalValue ] = useState<number>(initialValue);
     const [ products, setProducts ] = useState<Product[]>(initialProducts);
@@ -180,5 +149,5 @@ const NewInventory = (initialValue: number = 0, initialProducts: Product[] = [],
     }
 };
 
-export type { NewInventoryType };
-export { NewInventory };
+export type { InventoryType };
+export { Inventory };

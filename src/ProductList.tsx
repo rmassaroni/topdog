@@ -5,13 +5,12 @@ import { Cash, AssetType } from './Assets';
 // import { InventoryClass, InventoryType } from './Inventory';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NewInventory, NewInventoryType } from './NewInventory';
+import { Inventory, InventoryType } from './Inventory';
 
 interface ProductListProps {
     products: Product[];
     cash: AssetType;
-    // inv: InventoryType;
-    newInv: NewInventoryType;
+    newInv: InventoryType;
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products, cash, newInv}) => {
