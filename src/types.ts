@@ -1,16 +1,16 @@
 import { Product } from './Product';
 
-type AssetType = { //interface?
+type AssetType = {
     name: string;
     value: number;
-    count: number;
-    increment: () => void;
-    decrement: () => void;
     updateName: (newName: string) => void;
     updateValue: (newValue: number) => void;
     usd: () => string;
     fullName: () => string;
-    spendCash: (amount: number, object: string) => boolean;
+}
+
+type CashType = AssetType & {
+    spendCash: (amount: number) => boolean;
 }
 
 type InventoryType = {
@@ -20,5 +20,4 @@ type InventoryType = {
     component: () => JSX.Element;
 }
 
-
-export type { AssetType, InventoryType };
+export type { AssetType, CashType, InventoryType };

@@ -5,13 +5,6 @@ import { Asset, Cash } from './Assets';
 import { toast } from 'react-toastify';
 import { AssetType } from './types';
 
-// type InventoryType = {
-//     products: Product[];
-//     buy: (product: Product, quantity: number) => void;
-//     fullName: () => string;
-//     component: () => JSX.Element;
-// }
-
 interface InventoryProps {
     initialValue?: number;
     initialProducts?: Product[];
@@ -53,7 +46,7 @@ const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], ca
             product.setMarketStock(product.getMarketStock() - quantity);
         }
         setTotalValue(totalValue + product.getValue()*quantity);
-        toast.info(`Bought ${product.getName()} for ${product.usd(product.getValue()*quantity)}`, {
+        toast.info(`Purchased ${product.getName()} for ${product.usd(product.getValue()*quantity)}`, {
             position: 'top-right',
             autoClose: 1000,
             hideProgressBar: true,

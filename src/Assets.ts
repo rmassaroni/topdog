@@ -1,38 +1,9 @@
 import { useState } from 'react';
-import { Product } from './Product';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AssetType } from './types';
+import { AssetType, CashType } from './types';
 
-// interface AssetType {
-//     name: string;
-//     value: number;
-//     count: number;
-//     increment: () => void;
-//     decrement: () => void;
-//     updateName: (newName: string) => void;
-//     updateValue: (newValue: number) => void;
-//     usd: () => string;
-//     fullName: () => string;
-//     spendCash: (amount: number, object: string) => boolean;
-// }
-
-const useCounter = (initialCount: number = 0) => {
-    const [count, setCount] = useState<number>(initialCount);
-
-    const increment = () => setCount(prevCount => prevCount + 1);
-    const decrement = () => setCount(prevCount => prevCount - 1);
-
-    return {
-        count,
-        increment,
-        decrement
-    };
-};
-
-//will combine asset and usecounter
-const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: string = 'Asset') => {
-    const { count, increment, decrement } = useCounter(initialCount);
+const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
     const [ value, setValue ] = useState<number>(initialValue);
     const [ name, setName ] = useState<string>(initialName);
 
@@ -58,9 +29,6 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
     return {
         name,
         value,
-        count,
-        increment,
-        decrement,
         updateName,
         updateValue,
         usd,
@@ -68,9 +36,9 @@ const Asset = (initialValue: number = 0, initialCount: number = 0, initialName: 
     };
 };
 
-const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => {
-    const asset = Asset(initialValue, initialCount, 'Cash');
-    const spendCash = (amount: number, object: string = ''): boolean => {
+const Cash = (initialValue: number = 0): CashType => {
+    const asset = Asset(initialValue, 'Cash');
+    const spendCash = (amount: number): boolean => {
         if (amount > asset.value) {
             toast.error('Insufficient funds. Liquidate or acquire a lone.', {
                 position: 'top-right',
@@ -83,17 +51,6 @@ const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => 
             });
             return false;
         }
-        // toast.info('Purchased ' + {object != null ? object : ''} + ' for ' + amount, {
-        toast.info(`Purchased ${object != null ? object : ''} for ${asset.usd(amount)}`, {
-            position: 'top-right',
-            autoClose: 1000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-        
         asset.updateValue(asset.value - amount);
         return true;
     }
@@ -103,39 +60,4 @@ const Cash = (initialValue: number = 0, initialCount: number = 0): AssetType => 
     }
 }
 
-const Inventory = (initialValue: number = 0, initialCount: number = 0, initialQuantity: number = 0) => {
-    const asset = Asset(initialValue, initialCount, 'Inventory');
-    const [ quantity, setQuantity ] = useState<number>(initialQuantity);
-    const [ products, setProducts ] = useState<Product[]>([]);
-
-    const buyProduct = () => {
-        // setProducts(prevProducts => [...prevProducts, product]);
-        setQuantity(prevQ => prevQ + 1);
-    };
-
-    const sellProduct = () => {
-        // setProducts(prevProducts => {
-        //     const updatedProducts = [...prevProducts];
-        //     updatedProducts.splice(index, 1);
-        //     return updatedProducts;
-        // });
-        setQuantity(prevQ => prevQ - 1);
-    };
-
-    const fullName = (): string => {
-        return `${asset.fullName()}, quantity: ${quantity}`;
-    };
-
-    return {
-        ...asset,
-        quantity,
-        setQuantity,
-        products,
-        buyProduct,
-        sellProduct,
-        fullName
-    }
-}
-
-// export type { AssetType };
-export { useCounter, Asset, Cash, Inventory };
+export { Asset, Cash };
