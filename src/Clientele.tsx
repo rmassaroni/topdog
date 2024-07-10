@@ -8,13 +8,19 @@ class Customer {
     }
 
     private name: string;
+    private imageUrl: string;
 
-    constructor(name: string = 'Consumer') {
+    constructor(name: string = 'Customer') {
         this.name = name;
+        this.imageUrl = "/dog.png";
     }
 
     public getName(): string {
         return this.name;
+    }
+
+    public getImageUrl(): string {
+        return this.imageUrl;
     }
 }
 
@@ -60,14 +66,18 @@ const Clientele = () => {
 
     const component = () => {
         return (
-            <div>
-                <p>Current Customers:</p>
-                <ul>
+            <div style={{ marginLeft: "10px" }}>
+                <h2 style={{ marginBottom: "10px" }}>Clientele</h2>
+                <p style={{ marginTop: "5px" }}>Customer Count: {customerCount}</p>
+                <ul style={{ display: "flex", listStyleType: "none", paddingLeft: "0px" }}>
                     {currentCustomers.map((customer, index) => {
-                        return <li key={index}>{customer.getName()}</li>
+                        return <li style={{ display: "grid", textAlign: "center" }} key={index}>
+                            <img style={{ width: "100px" }} src={customer.getImageUrl()} alt="customer" />
+                            {customer.getName()}
+                        </li>
                     })}
                 </ul>
-                <p>Customer Count: {customerCount}</p>
+                
             </div>
         );
     }
