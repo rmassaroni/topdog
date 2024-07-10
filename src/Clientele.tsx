@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 class Customer {
     static currentConsumers: Customer[] = [];
@@ -22,28 +22,43 @@ class Customer {
 const Clientele = () => {
     const [storePopularity, setStorePopularity] = useState<number>(1);
     const [currentCustomers, setCurrentCustomers] = useState<Customer[]>([]);
+    const [customerCount, setCustomerCount] = useState<number>(0);
+    const [intervalMillis, setIntervalMillis] = useState<number>(1000 / storePopularity);
 
-    function simulateNewCustomer() {
-        // setCurrentCustomers([...currentCustomers, new Customer()]);
-        console.log("New customer entered the store.");
-        // console.log(currentCustomers.length + " customers in the store.");
-    }
+    const customerCountRef = useRef(customerCount);
+    const currentCustomersRef = useRef(currentCustomers);
 
-    const getCurrentCustomers = () => {
-        return currentCustomers.map((customer) => customer.getName());
-    }
+    useEffect(() => {
+        customerCountRef.current = customerCount;
+        currentCustomersRef.current = currentCustomers;
+    }, [customerCount, currentCustomers]);
 
-    const intervalMillis = 1000 / storePopularity;
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setCurrentCustomers((prevCustomers) => {
+                const newCustomers = [...prevCustomers, new Customer()];
+                currentCustomersRef.current = newCustomers;
+                return newCustomers;
+            });
+            setCustomerCount((prevCount) => {
+                const newCount = prevCount + 1;
+                customerCountRef.current = newCount;
+                return newCount;
+            });
+        }, intervalMillis);
+    
+        const timeoutId = setTimeout(() => {
+            clearInterval(intervalId);
+            console.log("Simulation stopped.");
+        }, 10000);
 
-    const intervalId = setInterval(simulateNewCustomer, intervalMillis);
-
-    setTimeout(() => {
-        clearInterval(intervalId);
-        console.log("Simulation stopped.");
-    }, 10000);
+        return () => {
+            clearInterval(intervalId);
+            clearTimeout(timeoutId);
+        }
+    }, [intervalMillis]);
 
     const component = () => {
-
         return (
             <div>
                 <p>Current Customers:</p>
@@ -52,6 +67,7 @@ const Clientele = () => {
                         return <li key={index}>{customer.getName()}</li>
                     })}
                 </ul>
+                <p>Customer Count: {customerCount}</p>
             </div>
         );
     }
@@ -61,8 +77,6 @@ const Clientele = () => {
         storePopularity,
         setStorePopularity,
         currentCustomers,
-        simulateNewCustomer,
-        getCurrentCustomers,
         component
     };
 }
