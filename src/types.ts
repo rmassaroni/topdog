@@ -16,6 +16,7 @@ type CashType = AssetType & {
 type InventoryType = {
     products: Product[];
     buy: (product: Product, quantity: number) => void;
+    sell: (index: number) => void;
     fullName: () => string;
     component: () => JSX.Element;
 }

@@ -5,13 +5,13 @@ import { Product } from './Product';
 import Market from './Market';
 import { AccountsPayable } from './Liabilities';
 import { Inventory } from './Inventory';
-import { Customer, Clientele } from './Clientele';
+import { Clientele } from './Clientele';
 
 const App: React.FC = () => {
     const cash = Cash(1000);
     const ap = AccountsPayable(0, 0);
     const inv = Inventory(0, [], cash);
-    const clientele = Clientele();
+    const clientele = Clientele(inv);
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -24,25 +24,6 @@ const App: React.FC = () => {
         ap.updateValue(ap.value + loanAmount);
         ap.updateExists(true);
     }
-
-    // function simulateNewCustomer() {
-    //     Customer.currentConsumers = [...Customer.currentConsumers, new Customer()];
-    //     console.log("New customer entered the store.");
-    //     console.log(Customer.currentConsumers.length + " customers in the store.");
-    // }
-    //
-    // const intervalMillis = 10000 / Customer.storePopularity;
-    //
-    // const intervalId = setInterval(simulateNewCustomer, intervalMillis);
-    //
-    // setTimeout(() => {
-    //     clearInterval(intervalId);
-    //     console.log("Simulation stopped.");
-    // }, 10000);
-
-
-    // const intervalMillis = 10000 / clientele.storePopularity;
-
 
     return (
         <div>

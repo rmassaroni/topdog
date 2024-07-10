@@ -77,7 +77,7 @@ export class Product {
         return this.marketValue;
     }
 
-    getDemand(price: number = this.value): number {
+    public getDemand(price: number = this.value): number {
         if (price <= this.marketValue) {
             return 1;
         } else {
