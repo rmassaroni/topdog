@@ -1,19 +1,21 @@
 import './App.css';
 import React from 'react';
-import { Cash } from './Assets';
+import { Cash, Assets } from './Assets';
 import { Product } from './Product';
 import Market from './Market';
 import { AccountsPayable } from './Liabilities';
 import { Inventory } from './Inventory';
 import { Clientele } from './Clientele';
 import BalanceSheet from './BalanceSheet';
+import { CashType } from './types';
 
 const App: React.FC = () => {
-    const cash = Cash(1000);
+    const cash: CashType = Cash(1000);
     const ap = AccountsPayable(0, 0);
     const inv = Inventory(0, [], cash);
     const clientele = Clientele(inv);
-    const bs = BalanceSheet(cash);
+    const assets = Assets(cash);
+    const bs = BalanceSheet(cash, assets);
 
     const products: Product[] = [
         new Product('Product A', 50),

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { ComponentType, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AssetType, CashType } from './types';
+import React from 'react';
 
 const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
     const [ value, setValue ] = useState<number>(initialValue);
@@ -60,4 +61,25 @@ const Cash = (initialValue: number = 0): CashType => {
     }
 }
 
-export { Asset, Cash };
+//COMPONENT
+const Assets = (cash: CashType) => {
+    const component = () => {
+        return (
+            <div>
+                <h3>Assets</h3>
+                <div className="asset-list">Current Assets
+                    <div className="asset-square">
+                        <div>{cash.name}</div>
+                        <div>{cash.usd()}</div>
+                    </div>
+                </div>
+            </div>
+        )
+    };
+    return {
+        cash,
+        component
+    }
+}
+
+export { Asset, Assets, Cash };

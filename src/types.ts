@@ -1,5 +1,11 @@
 import { Product } from './Product';
 
+// type ComponentType = () => JSX.Element;
+type AssetsType = {
+    cash: CashType;
+    component: () => JSX.Element;
+}
+
 type AssetType = {
     name: string;
     value: number;
@@ -21,4 +27,4 @@ type InventoryType = {
     component: () => JSX.Element;
 }
 
-export type { AssetType, CashType, InventoryType };
+export type { AssetType, CashType, InventoryType, AssetsType};

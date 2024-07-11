@@ -1,11 +1,15 @@
-import { CashType } from "./types";
+import { CashType, AssetsType } from "./types";
+import { Assets } from "./Assets";
+import React from 'react';
 
-const BalanceSheet = (cash: CashType) => {
+
+const BalanceSheet = (cash: CashType, assets: AssetsType) => {
 
 
     const component = () => (
         <div>
-            <h1>{cash.usd()}</h1>
+            <h2>Balance Sheet</h2>
+            {assets.component()}
         </div>
     );
 
