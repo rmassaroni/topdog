@@ -140,3 +140,9 @@
     margin: 0 10px;
     width: 25px;
   }
+
+.financial-statements {
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+}

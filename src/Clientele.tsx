@@ -58,7 +58,7 @@ class Customer {
 
 
 const Clientele = ( inv: InventoryType ) => {
-    const [storePopularity, setStorePopularity] = useState<number>(1);
+    const [storePopularity, setStorePopularity] = useState<number>(0.2);
     const [currentCustomers, setCurrentCustomers] = useState<Customer[]>([]);
     const [customerCount, setCustomerCount] = useState<number>(0);
     const [intervalMillis, setIntervalMillis] = useState<number>(1000 / storePopularity);
