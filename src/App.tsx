@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Cash, Assets } from './Assets';
+import { Cash, Assets, AccountsReceivable } from './Assets';
 import { Product } from './Product';
 import Market from './Market';
 import { AccountsPayable } from './Liabilities';
@@ -14,7 +14,7 @@ const App: React.FC = () => {
     const ap = AccountsPayable(0, 0);
     const inv = Inventory(0, [], cash);
     const clientele = Clientele(inv);
-    const assets = Assets(cash);
+    const assets = Assets(cash, AccountsReceivable(), inv);
     const bs = BalanceSheet(cash, assets);
 
     const products: Product[] = [

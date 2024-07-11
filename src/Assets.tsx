@@ -1,7 +1,7 @@
 import { ComponentType, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AssetType, CashType } from './types';
+import { AssetType, CashType, InventoryType } from './types';
 import React from 'react';
 
 const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
@@ -61,17 +61,31 @@ const Cash = (initialValue: number = 0): CashType => {
     }
 }
 
+const AccountsReceivable = (initialValue: number = 0): AssetType => {
+    return Asset(initialValue, 'Accounts Receivable');
+}
+
 //COMPONENT
-const Assets = (cash: CashType) => {
+const Assets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: InventoryType) => {
+    // const ar = AccountsReceivable();
     const component = () => {
         return (
             <div>
-                <h3>Assets</h3>
-                <div className="asset-list">Current Assets
+                <h3 style={{ margin: "5px" }}>Assets</h3>
+                <div className="asset-list" style={{ marginLeft: "20px"}}>
+                    <h4 style={{ margin: "5px 5px 5px 0px" }}>Current Assets</h4>
                     <div className="asset-square">
                         <div>{cash.name}</div>
                         <div>{cash.usd()}</div>
                     </div>
+                    <div className="asset-square">
+                        <div>{ar.name}</div>
+                        <div>{ar.usd()}</div>
+                        </div>
+                    <div className="asset-square">
+                        <div>Inventory</div>
+                        <div>{inv.usd()}</div>
+                        </div>
                 </div>
             </div>
         )
@@ -82,4 +96,4 @@ const Assets = (cash: CashType) => {
     }
 }
 
-export { Asset, Assets, Cash };
+export { Asset, Assets, Cash, AccountsReceivable};

@@ -23,6 +23,7 @@ type InventoryType = {
     products: Product[];
     buy: (product: Product, quantity: number) => void;
     sell: (index: number) => void;
+    usd: () => string;
     fullName: () => string;
     component: () => JSX.Element;
 }

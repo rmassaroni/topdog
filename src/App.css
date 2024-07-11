@@ -159,6 +159,8 @@
     justify-content: space-between;
     align-items: center;
     border: 1px solid #ccc;
-    margin: 5px;
+    margin: 1px;
     padding: 5px;
+    font-size: small;
+    margin-left: 5px;
 }

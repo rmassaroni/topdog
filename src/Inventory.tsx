@@ -138,6 +138,7 @@ const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], ca
         // buyProduct,
         // sellProduct,
         buy,
+        usd,
         sell,
         fullName,
         component,
