@@ -2,7 +2,6 @@ import { Product } from './Product';
 
 // type ComponentType = () => JSX.Element;
 type AssetsType = {
-    cash: CashType;
     component: () => JSX.Element;
 }
 

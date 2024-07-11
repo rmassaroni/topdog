@@ -68,12 +68,18 @@ const AccountsReceivable = (initialValue: number = 0): AssetType => {
 //COMPONENT
 const Assets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: InventoryType) => {
     // const ar = AccountsReceivable();
+    const usd = (num: number): string => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(num);
+    }
     const component = () => {
         return (
-            <div>
+            <div style={{ width: "50%" }}>
                 <h3 style={{ margin: "5px" }}>Assets</h3>
-                <div className="asset-list" style={{ marginLeft: "20px"}}>
-                    <h4 style={{ margin: "5px 5px 5px 0px" }}>Current Assets</h4>
+                <div className="asset-list" style={{ marginLeft: "0px"}}>
+                    <h4 style={{ margin: "5px 5px 5px 5px" }}>Current Assets</h4>
                     <div className="asset-square">
                         <div>{cash.name}</div>
                         <div>{cash.usd()}</div>
@@ -81,17 +87,20 @@ const Assets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: Inven
                     <div className="asset-square">
                         <div>{ar.name}</div>
                         <div>{ar.usd()}</div>
-                        </div>
+                    </div>
                     <div className="asset-square">
                         <div>Inventory</div>
                         <div>{inv.usd()}</div>
-                        </div>
+                    </div>
+                    <div className="asset-square" style={{ fontWeight: "bold" }}>
+                        <div>Total Current Assets</div>
+                        <div>{usd(cash.value + ar.value)}</div>
+                    </div>
                 </div>
             </div>
         )
     };
     return {
-        cash,
         component
     }
 }

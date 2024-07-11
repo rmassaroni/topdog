@@ -77,5 +77,28 @@ const AccountsPayable = (initialValue: number = 0, initialCount: number = 0): Li
     }
 }
 
+const Liabilities = () => {
+    const component = () => {
+        const accountsPayable = AccountsPayable(1000, 1);
+
+        return (
+            <div style={{ width: "50%"}}>
+                <h3 style={{ margin: "5px" }}>Liabilities</h3>
+                <div className="asset-list" style={{ marginLeft: "0px"}}>
+                    <h4 style={{ margin: "5px 5px 5px 5px" }}>Current Liabilities</h4>
+
+                    <div className="asset-square">
+                <div>{accountsPayable.name}</div>
+                        <div>{accountsPayable.usd()}</div>
+                </div>
+                </div>
+            </div>
+        );
+    }
+    return {
+        component
+    };
+    }
+
 export type { LiabilityType };
-export { Liability, AccountsPayable };
+export { Liability, AccountsPayable, Liabilities};

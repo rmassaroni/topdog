@@ -1,15 +1,19 @@
 import { CashType, AssetsType } from "./types";
 import { Assets } from "./Assets";
 import React from 'react';
+import { Liabilities } from "./Liabilities";
 
 
-const BalanceSheet = (cash: CashType, assets: AssetsType) => {
+const BalanceSheet = (cash: CashType, assets: AssetsType, liabilities: AssetsType) => {
 
 
     const component = () => (
         <div>
-            <h2>Balance Sheet</h2>
-            {assets.component()}
+            <h2 style={{ textAlign: "center", margin: "5px" }}>Balance Sheet as of July 2024</h2>
+            <div style={{ display: "flex" }}>
+                {assets.component()}
+                {liabilities.component()}
+            </div>
         </div>
     );
 

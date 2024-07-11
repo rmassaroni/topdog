@@ -8,6 +8,7 @@ import { Inventory } from './Inventory';
 import { Clientele } from './Clientele';
 import BalanceSheet from './BalanceSheet';
 import { CashType } from './types';
+import { Liabilities } from './Liabilities';
 
 const App: React.FC = () => {
     const cash: CashType = Cash(1000);
@@ -15,7 +16,7 @@ const App: React.FC = () => {
     const inv = Inventory(0, [], cash);
     const clientele = Clientele(inv);
     const assets = Assets(cash, AccountsReceivable(), inv);
-    const bs = BalanceSheet(cash, assets);
+    const bs = BalanceSheet(cash, assets, Liabilities());
 
     const products: Product[] = [
         new Product('Product A', 50),
