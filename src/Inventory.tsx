@@ -122,4 +122,4 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
     }
 };
 
-export { Inventory };
+export default Inventory;

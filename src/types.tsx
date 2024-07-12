@@ -1,6 +1,9 @@
 import { Product } from './Product';
+import { Customer } from './/clientele/Clientele';
 
-export type typeOfAccount = 'Asset' | 'Liability' | 'Equity';
+type typeOfAccount = 'Asset' | 'Liability' | 'Equity';
+type typeOfAsset = 'Cash' | 'Inventory' | 'Accounts Receivable';
+type typeOfLiability = 'Accounts Payable' | 'Loans Payable';
 
 export interface Comp {
     component: () => JSX.Element;
@@ -44,3 +47,19 @@ export interface TotalType extends Comp {
     totalValue: () => number;
 }
 
+export interface ClienteleType extends Comp {
+    storePopularity: number;
+    setStorePopularity: (value: number) => void;
+    currentCustomers: Customer[];
+}
+
+export interface IConsumer {
+    name: string;
+    imageUrl: string;
+}
+
+export interface ICustomer extends IConsumer {
+    spree: number;
+    attemptedProducts: { product: Product, bought: boolean }[];
+}
+    

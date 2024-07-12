@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 import { Cash, TotalAssets, AccountsReceivable } from './Assets';
 import { Product } from './Product';
 import Market from './Market';
-import { AccountsPayable } from './Liabilities';
-import { Inventory } from './Inventory';
-import { Clientele } from './Clientele';
+import { AccountsPayable, TotalLiabilities } from './Liabilities';
+import Inventory from './Inventory';
+import { Clientele } from './clientele/Clientele';
 import BalanceSheet from './BalanceSheet';
 import { CashType } from './types';
-import { TotalLiabilities } from './Liabilities';
 import Account from './Account';
 
 const App: React.FC = () => {
