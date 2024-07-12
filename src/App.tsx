@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { Cash, Assets, AccountsReceivable } from './Assets';
 import { Product } from './Product';
 import Market from './Market';
@@ -9,14 +9,18 @@ import { Clientele } from './Clientele';
 import BalanceSheet from './BalanceSheet';
 import { CashType } from './types';
 import { Liabilities } from './Liabilities';
+import { Account } from './Account';
 
 const App: React.FC = () => {
+    const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
+
     const cash: CashType = Cash(1000);
     const ap = AccountsPayable(0, 0);
     const inv = Inventory(0, [], cash);
     const clientele = Clientele(inv);
     const assets = Assets(cash, AccountsReceivable(), inv);
     const bs = BalanceSheet(cash, assets, Liabilities());
+    const account = Account();
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -34,6 +38,7 @@ const App: React.FC = () => {
         <div style={{ display: "flex" }}>
             <div style={{ width: "50%" }}>
                 <p>{cash.fullName()}</p>
+                <p>Accept Credit: {acceptCredit ? 'true' : 'false'}</p>
                 {ap.exists && <p>{ap.fullName()}</p>}
                 <button onClick={() => handleLoan(100)}>Acquire Loan for $100</button>
                 {inv.component()}
@@ -43,6 +48,7 @@ const App: React.FC = () => {
                     inv={inv}
                 />
                 {clientele.component()}
+                <div>{account.component()}</div>
             </div>
             <div className='financial-statements'>
                 <h1>Financial Statements</h1>
