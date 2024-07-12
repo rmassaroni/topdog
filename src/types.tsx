@@ -1,67 +1,46 @@
 import { Product } from './Product';
 
-type CompType = {
-    component: () => JSX.Element;
-}
-
-// type AccountType = CompType & {
-//     name: string;
-//     value: number;
-//     updateName: (newName: string) => void;
-//     updateValue: (newValue: number) => void;
-//     usd: () => string;
-//     fullName: () => string;
-// }
-
-type AccountType = 'Asset' | 'Liability' | 'Equity';
-
-// export type Account = AssetAccount | LiabilityAccount | EquityAccount;
+export type typeOfAccount = 'Asset' | 'Liability' | 'Equity';
 
 export interface Comp {
     component: () => JSX.Element;
 }
 
-export interface Account extends Comp {
-    type: AccountType;
-    name: string;
-    value: number;
-    updateName: (newName: string) => void;
-    updateValue: (newValue: number) => void;
-    usd: () => string;
-    fullName: () => string;
-}
-
-type AssetType = {
-    name: string;
-    value: number;
-    updateName: (newName: string) => void;
-    updateValue: (newValue: number) => void;
-    usd: () => string;
-    fullName: () => string;
-}
-
-type CashType = AssetType & {
-    spendCash: (amount: number) => boolean;
-}
-
-type InventoryType = {
-    products: Product[];
-    buy: (product: Product, quantity: number) => void;
-    sell: (index: number) => void;
-    usd: () => string;
-    fullName: () => string;
-    component: () => JSX.Element;
-}
-
-type LiabilityType = {
+export interface AccountType extends Comp {
+    type?: typeOfAccount;
     name: string;
     value: number;
     exists: boolean;
-    updateName: (newName: string) => void;
-    updateValue: (newValue: number) => void;
-    updateExists: (newExists: boolean) => void;
+    updateName: (newName: string) => string;
+    updateValue: (newValue: number) => number;
+    updateExists: (newExists: boolean) => boolean;
     usd: () => string;
     fullName: () => string;
 }
 
-export type { AssetType, CashType, InventoryType, CompType, LiabilityType };
+export interface AssetType extends AccountType {
+    type: typeOfAccount;
+}
+
+export interface CashType extends AssetType {
+    spendCash: (amount: number) => boolean;
+}
+
+export interface InventoryType extends AssetType {
+    products: Product[];
+    buy: (product: Product, quantity: number) => void;
+    sell: (index: number) => void;
+    panel: () => JSX.Element;
+}
+
+export interface LiabilityType extends AccountType {
+    type: typeOfAccount;
+}
+
+export interface TotalType extends Comp {
+    type: typeOfAccount;
+    accounts: AccountType[];
+    updateAccounts: (newAccounts: AccountType[]) => AccountType[];
+    totalValue: () => number;
+}
+

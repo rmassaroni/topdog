@@ -1,35 +1,18 @@
 import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
-import { Asset, Cash } from './Assets';
+import { Asset } from './Assets';
 import { toast } from 'react-toastify';
-import { AssetType } from './types';
+import { CashType, InventoryType } from './types';
 
-interface InventoryProps {
-    initialValue?: number;
-    initialProducts?: Product[];
-    cash: AssetType;
-}
+const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
 
-const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], cash: AssetType ) => {
-    const name: string = 'Inventory';
     const [ totalValue, setTotalValue ] = useState<number>(initialValue);
     const [ products, setProducts ] = useState<Product[]>(initialProducts);
     const [manager, setManager] = useState<boolean>(false);
     const [autoMarkup, setAutoMarkup] = useState<number>(0.05);
     const [autoSell, setAutoSell] = useState<boolean>(false);
     const [ capacity, setCapacity ] = useState<number>(20);
-
-    const usd = (num: number = totalValue): string => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(num);
-    }
-
-    const fullName = (): string => {
-        return name + ': ' + usd();
-    }
 
     const getTotalStock = (): number => {
         return products.reduce((total, product) => total + product.getInStock(), 0);
@@ -73,13 +56,12 @@ const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], ca
                 progress: undefined,
             });
         }
-
         if (product.getInStock() === 0) {
             products.splice(index, 1);
         }
     };
 
-    const component = () => {
+    const panel = (): JSX.Element => {
         return (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
@@ -130,20 +112,14 @@ const Inventory = (initialValue: number = 0, initialProducts: Product[] = [], ca
             </div>
         </div>
     )};
+
    return {
-        // ...asset,
-        // quantity,
-        // setQuantity,
+        ...Asset(totalValue, 'Inventory'),
         products,
-        // buyProduct,
-        // sellProduct,
         buy,
-        usd,
         sell,
-        fullName,
-        component,
+        panel,
     }
 };
 
-// export type { InventoryType };
 export { Inventory };

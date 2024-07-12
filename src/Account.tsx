@@ -1,20 +1,58 @@
-import React from 'react';
-import { Comp } from './types';
+import React, { useState } from 'react';
+import { AccountType } from './types';
 
-const Account = (): Comp => {
-    
-    //line item
+const Account = (initialValue: number = 0, initialName: string = 'Account'): AccountType => {
+
+    const [name, setName] = useState<string>(initialName);
+    const [value, setValue] = useState<number>(initialValue);
+    const [exists, setExists] = useState<boolean>(initialValue > 0);
+
+    const updateName = (newName: string): string => {
+        setName(newName);
+        return newName;
+    }
+
+    const updateValue = (newValue: number): number => {
+        setValue(newValue);
+        return newValue;
+    }
+
+    const updateExists = (newExists: boolean): boolean => {
+        setExists(newExists);
+        return newExists;
+    }
+
+    const usd = (val: number = value): string => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(val);
+    }
+
+    const fullName = () => {
+        return `${name}: ${usd()}`;
+    }
+
     const component = () => {
         return (
-            <div>
-                <h1>Account</h1>
+            <div className="asset-square">
+                <div>{name}</div>
+                <div>{usd()}</div>
             </div>
         );
     }
 
     return {
-        component
+        component,
+        name,
+        value,
+        exists,
+        updateName,
+        updateValue,
+        updateExists,
+        usd,
+        fullName,
     };
 };
 
-export { Account };
+export default Account;
