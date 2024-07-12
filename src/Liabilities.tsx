@@ -86,11 +86,14 @@ const Liabilities = () => {
                 <h3 style={{ margin: "5px" }}>Liabilities</h3>
                 <div className="asset-list" style={{ marginLeft: "0px"}}>
                     <h4 style={{ margin: "5px 5px 5px 5px" }}>Current Liabilities</h4>
-
                     <div className="asset-square">
-                <div>{accountsPayable.name}</div>
+                        <div>{accountsPayable.name}</div>
                         <div>{accountsPayable.usd()}</div>
-                </div>
+                    </div>
+                    <div className="asset-square" style={{ fontWeight: "bold" }}>
+                        <div>Total Current Liablities</div>
+                        <div>{accountsPayable.usd()}</div>
+                    </div>
                 </div>
             </div>
         );
@@ -98,7 +101,7 @@ const Liabilities = () => {
     return {
         component
     };
-    }
+}
 
 export type { LiabilityType };
-export { Liability, AccountsPayable, Liabilities};
+export { Liability, AccountsPayable, Liabilities };
