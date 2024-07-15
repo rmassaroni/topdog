@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState } from 'react';
-import Account from './accounts/Account';
 import { Cash, TotalAssets, AccountsReceivable } from './accounts/Assets';
 import BalanceSheet from './accounts/BalanceSheet';
 import { AccountsPayable, TotalLiabilities } from './accounts/Liabilities';
@@ -19,7 +18,6 @@ const App: React.FC = () => {
     const clientele = Clientele(inv);
     const assets = TotalAssets(cash, AccountsReceivable(), inv);
     const bs = BalanceSheet(cash, assets, TotalLiabilities());
-    const account = Account();
 
     const products: Product[] = [
         new Product('Product A', 50),
@@ -47,7 +45,6 @@ const App: React.FC = () => {
                     inv={inv}
                 />
                 {clientele.component()}
-                <div>{account.component()}</div>
             </div>
             <div className='financial-statements'>
                 <h1>Financial Statements</h1>
