@@ -27,7 +27,9 @@ const Account = (initialValue: number = 0, initialName: string = 'Account'): Acc
         setValue,
         setExists,
         usd,
-        fullName,
+        fullName
+        // usd: (val: number = value): string => USD(val),
+        // fullName: (): string => `${name}: ${USD(value)}`
     };
 };
 
