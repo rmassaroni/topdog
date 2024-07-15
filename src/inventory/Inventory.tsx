@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
-import { Asset } from '../accounts/assets/Assets';
+import Asset from '../accounts/assets/Assets';
 import { toast } from 'react-toastify';
 import { CashType, InventoryType } from '../types';
 import { USD } from '../utils';
