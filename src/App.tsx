@@ -9,6 +9,7 @@ import { Clientele } from './clientele/Clientele';
 import BalanceSheet from './BalanceSheet';
 import { CashType } from './types';
 import Account from './Account';
+import { useGlobal } from './GlobalContext';
 
 const App: React.FC = () => {
     const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
@@ -20,6 +21,11 @@ const App: React.FC = () => {
     const assets = TotalAssets(cash, AccountsReceivable(), inv);
     const bs = BalanceSheet(cash, assets, TotalLiabilities());
     const account = Account();
+
+    const { usd } = useGlobal();
+
+    let x = usd(1000);
+
 
     const products: Product[] = [
         new Product('Product A', 50),

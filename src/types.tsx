@@ -17,7 +17,7 @@ export interface AccountType extends Comp {
     updateName: (newName: string) => string;
     updateValue: (newValue: number) => number;
     updateExists: (newExists: boolean) => boolean;
-    usd: () => string;
+    usd: (val: number) => string;
     fullName: () => string;
 }
 
@@ -45,6 +45,7 @@ export interface TotalType extends Comp {
     accounts: AccountType[];
     updateAccounts: (newAccounts: AccountType[]) => AccountType[];
     totalValue: () => number;
+    length: () => number;
 }
 
 export interface ClienteleType extends Comp {
@@ -62,5 +63,3 @@ export interface ICustomer extends IConsumer {
     spree: number;
     attemptedProducts: { product: Product, bought: boolean }[];
 }
-    
-export {};

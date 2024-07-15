@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
+import { GlobalProvider } from './GlobalContext';
+
+window.greet = (name) => {
+    return `Hello, ${name}!`;
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <GlobalProvider>
+            <App />
+        </GlobalProvider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

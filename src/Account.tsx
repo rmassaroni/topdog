@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AccountType } from './types';
+import { USD } from './utils';
 
 const Account = (initialValue: number = 0, initialName: string = 'Account'): AccountType => {
 
@@ -22,12 +23,7 @@ const Account = (initialValue: number = 0, initialName: string = 'Account'): Acc
         return newExists;
     }
 
-    const usd = (val: number = value): string => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(val);
-    }
+    const usd = (val: number = value): string => USD(val);
 
     const fullName = () => {
         return `${name}: ${usd()}`;

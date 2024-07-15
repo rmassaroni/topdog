@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Account from './Account';
 import { AccountType, AssetType, CashType, InventoryType, TotalType } from './types';
+import { USD } from './utils';
 
 const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
     return {
@@ -51,12 +52,7 @@ const TotalAssets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: 
         return accounts.reduce((total, account) => total + account.value, 0);
     }
 
-    const usd = (num: number): string => { //will try to use an existing usd()
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(num);
-    }
+    const usd = (val: number = totalValue()): string => USD(val);
 
     const component = () => {
         return (
@@ -69,7 +65,7 @@ const TotalAssets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: 
                     {inv.component()}
                     <div className="asset-square" style={{ fontWeight: "bold" }}>
                         <div>Total Current Assets</div>
-                        <div>{usd(totalValue())}</div>
+                        <div>{usd()}</div>
                     </div>
                 </div>
             </div>
@@ -80,7 +76,8 @@ const TotalAssets = (cash: CashType, ar: AssetType = AccountsReceivable(), inv: 
         component,
         accounts,
         updateAccounts,
-        totalValue
+        totalValue,
+        length: () => accounts.length
     }
 }
 

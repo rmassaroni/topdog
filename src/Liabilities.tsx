@@ -2,6 +2,7 @@ import { LiabilityType, TotalType } from './types';
 import Account from './Account';
 import React, { useState } from 'react';
 import { AccountType } from './types';
+import { USD } from './utils';
 
 export const Liability = (initialValue: number = 0, initialName: string = 'Liability'): LiabilityType => {
     return {
@@ -28,12 +29,7 @@ export const TotalLiabilities = (ap: LiabilityType = AccountsPayable(100)): Tota
         return accounts.reduce((total, account) => total + account.value, 0);
     }
 
-    const usd = (num: number): string => { //will try to use an existing usd()
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(num);
-    }
+    const usd = (val: number = totalValue()): string => USD(val);
 
     const component = () => {
         return (
@@ -44,7 +40,7 @@ export const TotalLiabilities = (ap: LiabilityType = AccountsPayable(100)): Tota
                     {ap.component()}
                     <div className="asset-square" style={{ fontWeight: "bold" }}>
                         <div>Total Current Liablities</div>
-                        <div>{usd(totalValue())}</div>
+                        <div>{usd()}</div>
                     </div>
                 </div>
             </div>
@@ -56,6 +52,7 @@ export const TotalLiabilities = (ap: LiabilityType = AccountsPayable(100)): Tota
         type: 'Liability',
         accounts,
         updateAccounts,
-        totalValue
+        totalValue,
+        length: () => accounts.length
     };
 }
