@@ -20,9 +20,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
         return products.reduce((total, product) => total + product.getInStock(), 0);
     }
 
-    const usd = (val: number = totalValue): string => {
-        return USD(val);
-    }
+    const usd = (val: number = totalValue): string => USD(val);
 
     const buy = (product: Product, quantity: number = 1) => {
         const existingProduct = products.find(p => p.getName() === product.getName());
