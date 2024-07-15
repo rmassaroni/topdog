@@ -1,14 +1,14 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Cash, TotalAssets, AccountsReceivable } from './Assets';
+import { Cash, TotalAssets, AccountsReceivable } from './accounts/Assets';
 import { Product } from './inventory/Product';
 import Market from './inventory/Market';
-import { AccountsPayable, TotalLiabilities } from './Liabilities';
+import { AccountsPayable, TotalLiabilities } from './accounts/Liabilities';
 import Inventory from './inventory/Inventory';
 import { Clientele } from './clientele/Clientele';
-import BalanceSheet from './BalanceSheet';
+import BalanceSheet from './accounts/BalanceSheet';
 import { CashType } from './types';
-import Account from './Account';
+import Account from './accounts/Account';
 import { useGlobal } from './GlobalContext';
 
 const App: React.FC = () => {

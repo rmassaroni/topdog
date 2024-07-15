@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { AccountType } from './types';
-import { USD } from './utils';
+import { AccountType } from '../types';
+import { USD } from '../utils';
 
 const Account = (initialValue: number = 0, initialName: string = 'Account'): AccountType => {
 

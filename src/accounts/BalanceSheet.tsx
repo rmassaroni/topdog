@@ -1,4 +1,4 @@
-import { CashType, Comp } from "./types";
+import { CashType, Comp } from "../types";
 import { TotalAssets } from "./Assets";
 import React from 'react';
 import { TotalLiabilities } from "./Liabilities";

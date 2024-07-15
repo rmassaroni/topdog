@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Account from './Account';
-import { AccountType, AssetType, CashType, InventoryType, TotalType } from './types';
-import { USD } from './utils';
+import { AccountType, AssetType, CashType, InventoryType, TotalType } from '../types';
+import { USD } from '../utils';
 
 const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
     return {

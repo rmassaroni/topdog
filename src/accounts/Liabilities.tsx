@@ -1,8 +1,8 @@
-import { LiabilityType, TotalType } from './types';
+import { LiabilityType, TotalType } from '../types';
 import Account from './Account';
 import React, { useState } from 'react';
-import { AccountType } from './types';
-import { USD } from './utils';
+import { AccountType } from '../types';
+import { USD } from '../utils';
 
 export const Liability = (initialValue: number = 0, initialName: string = 'Liability'): LiabilityType => {
     return {
