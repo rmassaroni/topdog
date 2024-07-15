@@ -1,4 +1,4 @@
-import { Product } from './Product';
+import { Product } from './inventory/Product';
 import { Customer } from './/clientele/Clientele';
 
 type typeOfAccount = 'Asset' | 'Liability' | 'Equity';

@@ -1,4 +1,4 @@
-import { Product } from '../Product';
+import { Product } from '../inventory/Product';
 import Consumer from './Consumer';
 import { ICustomer } from '../types';
 

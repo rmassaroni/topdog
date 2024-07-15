@@ -1,9 +1,9 @@
 import React from 'react';
 import { Product } from './Product';
 import { useState } from 'react';
-import { Asset } from './Assets';
+import { Asset } from '../Assets';
 import { toast } from 'react-toastify';
-import { CashType, InventoryType } from './types';
+import { CashType, InventoryType } from '../types';
 
 const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
 
