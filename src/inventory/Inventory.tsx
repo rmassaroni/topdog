@@ -8,7 +8,6 @@ import { USD } from '../utils';
 import ProductList from './ProductList';
 
 const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
-
     const [ totalValue, setTotalValue ] = useState<number>(initialValue);
     const [ products, setProducts ] = useState<Product[]>(initialProducts);
     const [manager, setManager] = useState<boolean>(false);
@@ -16,9 +15,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
     const [autoSell, setAutoSell] = useState<boolean>(false);
     const [ capacity, setCapacity ] = useState<number>(20);
 
-    const getTotalStock = (): number => {
-        return products.reduce((total, product) => total + product.getInStock(), 0);
-    }
+    const getTotalStock = (): number => products.reduce((total, product) => total + product.getInStock(), 0);
 
     const usd = (val: number = totalValue): string => USD(val);
 
@@ -65,8 +62,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
         }
     };
 
-    const panel = (): JSX.Element => {
-        return (
+    const panel = (): JSX.Element => (
         <div style={{ marginLeft: "10px" }}>
             <div style={{ display: "flex" }}>
                 <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>Inventory</h2>
@@ -83,20 +79,18 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
                     <button onClick={() => setAutoMarkup(autoMarkup+0.05)}>+</button>
                 </div>
             </div>}
-                <ProductList products={products} autoMarkup={autoMarkup} sell={sell} />
+            <ProductList products={products} autoMarkup={autoMarkup} sell={sell} />
         </div>
-    )};
+    );
 
-    const component = () => {
-        return (
-            <div className="asset-square">
-                <div>{'Inventory'}</div>
-                <div>{usd()}</div>
-            </div>
-        );
-    }
+    const component = () => (
+        <div className="asset-square">
+            <div>{'Inventory'}</div>
+            <div>{usd()}</div>
+        </div>
+    );
 
-   return {
+    return {
         ...Asset(totalValue, 'Inventory'),
         products,
         buy,

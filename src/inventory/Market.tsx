@@ -10,7 +10,7 @@ interface MarketProps {
     inv: InventoryType;
 }
 
-const Market: React.FC<MarketProps> = ({ products, cash, inv}) => {
+const Market: React.FC<MarketProps> = ({ products, cash, inv }) => {
     const [productList, setProductList] = useState(products);
 
     const handleBuy = (index: number) => {
