@@ -17,7 +17,8 @@ const App: React.FC = () => {
     const inv = Inventory(0, [], cash);
     const clientele = Clientele(inv);
     const assets = TotalAssets(cash, AccountsReceivable(), inv);
-    const bs = BalanceSheet(assets, TotalLiabilities());
+    const liabilities = TotalLiabilities(ap);
+    const bs = BalanceSheet(assets, liabilities);
 
     const products: Product[] = [
         new Product('Product A', 50),
