@@ -5,6 +5,7 @@ import Asset from '../accounts/assets/Assets';
 import { toast } from 'react-toastify';
 import { CashType, InventoryType } from '../types';
 import { USD } from '../utils';
+import ProductList from './ProductList';
 
 const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
 
@@ -45,7 +46,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
         });
     }
 
-    const sell = (index: number) => {
+    const sell = (index: number): void => {
         const product = products[index];
         if (product.getInStock() > 0) {
             product.setInStock(product.getInStock() - 1);
@@ -84,37 +85,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
                     <button onClick={() => setAutoMarkup(autoMarkup+0.05)}>+</button>
                 </div>
             </div>}
-        <div className="product-list">
-            {products.map((product, index) => (
-                <div key={index} className="product-square" onClick={() => sell(index)}>
-                    <div style={{ 
-                        width: "inherit", 
-                        display: "flex", 
-                        justifyContent: "space-between", 
-                        fontSize: "small"
-                    }}>
-                        <div>{product.usd(product.getMarketValue())}</div>
-                        <div>{product.getInStock()}</div>
-                            <div>{product.getDemand(product.getValue()*(1+autoMarkup)).toFixed(2)}</div>
-                    </div>
-                        <div style={{ fontSize: "xxx-large" }}>{product.getIcon()}</div>
-                        <div style={{ fontSize: "medium", color: product.getValue() * (1 + autoMarkup) > product.getValue() ? "green" 
-                            : product.getValue() * (1 + autoMarkup) < product.getValue()
-                                ? "red"
-                                : "black"}}>{product.usd(product.getValue()*(1+autoMarkup))}</div>
-                        <div className="product-info">
-                            <div className="popup">
-                                <div className="product-name">{product.getName()}</div>
-                            </div>
-                        </div>
-                        <div className="product-info" style={{ transform: "translate(0%, -50%)"}}>
-                            <div className="popup">
-                                <div className="product-name">{product.getName()}</div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                <ProductList products={products} autoMarkup={autoMarkup} sell={sell} />
         </div>
     )};
 
