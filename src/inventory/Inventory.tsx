@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Asset } from '../accounts/Assets';
 import { toast } from 'react-toastify';
 import { CashType, InventoryType } from '../types';
+import { USD } from '../utils';
 
 const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
 
@@ -16,6 +17,10 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
 
     const getTotalStock = (): number => {
         return products.reduce((total, product) => total + product.getInStock(), 0);
+    }
+
+    const usd = (val: number = totalValue): string => {
+        return USD(val);
     }
 
     const buy = (product: Product, quantity: number = 1) => {
@@ -113,12 +118,23 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
         </div>
     )};
 
+    const component = () => {
+        return (
+            <div className="asset-square">
+                <div>{'Inventory'}</div>
+                <div>{usd()}</div>
+            </div>
+        );
+    }
+
    return {
         ...Asset(totalValue, 'Inventory'),
         products,
         buy,
         sell,
         panel,
+        usd,
+        component,
     }
 };
 
