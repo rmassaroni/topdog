@@ -57,7 +57,7 @@ const Clientele = ( inv: InventoryType ): ClienteleType => {
             if (currentCustomersRef.current.length === 0) {
                 console.log("No customers to serve.");
                 return;
-            } else if (currentCustomersRef.current[0].getSpree() === currentCustomersRef.current[0].getAttemptedProducts().length) {
+            } else if (currentCustomersRef.current[0].spree === currentCustomersRef.current[0].attemptedProducts.length) {
                 console.log("Customer spree over.");
                 setCurrentCustomers((prevCustomers) => prevCustomers.slice(1));
                 currentCustomersRef.current = currentCustomersRef.current.slice(1);
@@ -94,9 +94,9 @@ const Clientele = ( inv: InventoryType ): ClienteleType => {
                         return <li style={{ display: "grid", textAlign: "center" }} key={index}>
                             <img style={{ width: "100px" }} src={customer.imageUrl} alt="customer" />
                             <p style={{ marginTop: "0px", marginBottom: "0px" }}>{customer.name}</p>
-                            <p style={{ marginTop: "0px", marginBottom: "0px" }}>Spree: {customer.getSpree()}</p>
+                            <p style={{ marginTop: "0px", marginBottom: "0px" }}>Spree: {customer.spree}</p>
                             <ul style={{ listStyleType: "none", padding: "0" }}>
-                                {customer.getAttemptedProducts().map((attempt, index) => (
+                                {customer.attemptedProducts.map((attempt, index) => (
                                     <li key={index} style={{ color: attempt.bought ? "green" : "red" }}>
                                         {attempt.product.getName()}
                                     </li>

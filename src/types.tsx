@@ -63,3 +63,4 @@ export interface ICustomer extends IConsumer {
     attemptedProducts: { product: Product, bought: boolean }[];
 }
     
+export {};
