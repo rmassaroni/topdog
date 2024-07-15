@@ -25,7 +25,7 @@ export const Cash = (initialValue: number = 0): CashType => {
             });
             return false;
         }
-        asset.updateValue(asset.value - amount);
+        asset.setValue(asset.value - amount);
         return true;
     }
     return {

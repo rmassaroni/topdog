@@ -14,9 +14,9 @@ export interface AccountType extends Comp {
     name: string;
     value: number;
     exists: boolean;
-    updateName: (newName: string) => string;
-    updateValue: (newValue: number) => number;
-    updateExists: (newExists: boolean) => boolean;
+    setName: (newName: string) => void;
+    setValue: (newValue: number) => void;
+    setExists: (newExists: boolean) => void;
     usd: (val: number) => string;
     fullName: () => string;
 }

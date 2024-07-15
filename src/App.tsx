@@ -29,9 +29,9 @@ const App: React.FC = () => {
     ];
 
     const handleLoan = (loanAmount: number = 100) => {
-        cash.updateValue(cash.value + loanAmount);
-        ap.updateValue(ap.value + loanAmount);
-        ap.updateExists(true);
+        cash.setValue(cash.value + loanAmount);
+        ap.setValue(ap.value + loanAmount);
+        ap.setExists(true);
     }
 
     return (

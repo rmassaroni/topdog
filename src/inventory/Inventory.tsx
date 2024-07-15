@@ -46,7 +46,7 @@ const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): Inv
         if (product.getInStock() > 0) {
             product.setInStock(product.getInStock() - 1);
             product.setMarketStock(product.getMarketStock() + 1);
-            cash.updateValue(cash.value + product.getValue()*(1+autoMarkup));
+            cash.setValue(cash.value + product.getValue()*(1+autoMarkup));
             toast.info(`Sold ${product.getName()} for ${product.usd(product.getValue()*(1+autoMarkup))}`, {
                 position: 'top-right',
                 autoClose: 1000,
