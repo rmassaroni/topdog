@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Cash, TotalAssets, AccountsReceivable } from './accounts/Assets';
+import { Cash, AccountsReceivable } from './accounts/assets/Assets';
+import TotalAssets from './accounts/assets/TotalAssets';
 import BalanceSheet from './accounts/BalanceSheet';
-import { AccountsPayable, TotalLiabilities } from './accounts/Liabilities';
+import { AccountsPayable, TotalLiabilities } from './accounts/liabilities/Liabilities';
 import { Product } from './inventory/Product';
 import Market from './inventory/Market';
 import Inventory from './inventory/Inventory';
