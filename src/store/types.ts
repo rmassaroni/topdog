@@ -3,6 +3,7 @@ import { Comp } from '../types';
 export type ChunkType = 'shelf' | 'cash register' | 'door' | 'empty';
 export type WallType = 'empty' | 'wall' | 'door';
 export type ShelfLocation = 'none' | 'top' | 'bottom' | 'left' | 'right';
+export type ItemType = 'shelf' | 'cash register' | 'door' | 'empty';
 
 export interface IChunk extends Comp {
     length: number;
