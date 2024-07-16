@@ -6,7 +6,7 @@ import BalanceSheet from './accounts/BalanceSheet';
 import { AccountsPayable } from './accounts/liabilities/Liabilities';
 import TotalLiabilities from './accounts/liabilities/TotalLiabilities';
 import { Product } from './inventory/Product';
-import Market from './inventory/Market';
+import Market from './supplyChain/Market';
 import Inventory from './inventory/Inventory';
 import { Clientele } from './clientele/Clientele';
 import { CashType } from './types';

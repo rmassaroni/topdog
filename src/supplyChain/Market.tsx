@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CashType, InventoryType } from '../types';
-import { Product } from './Product';
+import { Product } from '../inventory/Product';
 
 interface MarketProps {
     products: Product[];
