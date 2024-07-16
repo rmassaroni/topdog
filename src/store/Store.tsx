@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IChunk } from './types';
-import Chunk from './Chunk'
+import Chunk from './Chunk';
+import './Store.css';
 
 const Store = (plotLength: number = 1, plotWidth: number = 1) => {
     const generateChunks = (rows: number, cols: number): IChunk[][] => {
