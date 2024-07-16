@@ -9,23 +9,28 @@ const Store = (plotLength: number = 1, plotWidth: number = 1) => {
         for (let i = 0; i < rows; i++) {
             const row: IChunk[] = [];
             for (let j = 0; j < cols; j++) {
-                // const walls = {
-                //     top: i === 0,
-                //     right: j === cols - 1,
-                //     bottom: i === rows - 1,
-                //     left: j === 0
-                // };
-            let walls: 'empty' | 'wall' | ('door' | 'empty')[] = ['empty', 'empty', 'empty', 'empty'];
+                let walls: 'empty' | 'wall' | ('door' | 'empty' | 'wall')[] = ['empty', 'empty', 'empty', 'empty'];
 
-            //  if (i === 0 && j === 0) walls = ['door', 'empty', 'empty', 'empty'];
-            // else if (i === rows - 1 && j === cols - 1) walls = ['empty', 'empty', 'door', 'empty'];
-            // else if (i === 0) walls = ['door', 'wall', 'door', 'wall'];
-            // else if (j === 0) walls = ['wall', 'empty', 'wall', 'empty'];
+                if (i === 0) walls[0] = 'wall';
+                if (j === cols - 1) walls[1] = 'wall';
+                if (i === rows - 1) walls[2] = 'wall';
+                if (j === 0) walls[3] = 'wall';
+                
+                if (i === rows - 1 && j === 2) walls[2] = 'door';
+
                 let type: 'shelf' | 'cash register' | 'door' | 'empty' = 'empty';
-                if (i === 0 && j === 0) type = 'door';
-                else if (i === 1 && j === 1) type = 'cash register';
-                else if (i === 2) type = 'shelf';
-                row.push(Chunk(type, walls));
+                let position: 'top' | 'bottom' | 'left' | 'right' = 'top';
+                if (i === 0 && j === 4) type = 'cash register';
+                else if (i === 2 || i === 3) type = 'shelf';
+                else if (i === 1 && j === 0) type = 'shelf';
+                else if (i === 0 && j === 0) type = 'shelf';
+                if (i === 4 && (j === 4 || j === 0)) type = 'shelf';
+                if (i === 4 && j === 3) type = 'shelf';
+                if (i === 2) position = 'bottom';
+                if (i === 4) position = 'bottom';
+                if (j === 0) position = 'left';
+
+                row.push(Chunk(type, walls, position));
             }
             chunks.push(row);
         }

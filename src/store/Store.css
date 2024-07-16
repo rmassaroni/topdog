@@ -1,32 +1,128 @@
+.store-container {
+    display: grid;
+    gap: 0px;
+    /* border: 2px solid #333; */
+    padding: 0px;
+}
+
+.store-item-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+}
+
+.store-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #333; */
+    /* font-size: 0.8rem; */
+    /* aspect-ratio: 1 / 1; */
+    position: relative;
+}
+
+.door {
+    background-color: #8b4513;
+}
+
+.cash-register {
+    background-color: #c0c0c0;
+}
+
+/* .shelf { */
+/*   background-color: #f4a460; */
+/* } */
+
+
+
 .wall-top {
-  border-top: 3px solid #000;
+    border-top: 3px solid #000;
 }
 
 .wall-right {
-  border-right: 3px solid #000;
+    border-right: 3px solid #000;
 }
 
 .wall-bottom {
-  border-bottom: 3px solid #000;
+    border-bottom: 3px solid #000;
 }
 
 .wall-left {
-  border-left: 3px solid #000;
+    border-left: 3px solid #000;
 }
 
-/* No-wall styles */
 .no-wall-top {
-  border-top: 1px dashed #0005;
+    border-top: 1px dashed #0005;
 }
 
 .no-wall-right {
-  border-right: 1px dashed #0005;
+    border-right: 1px dashed #0005;
 }
 
 .no-wall-bottom {
-  border-bottom: 1px dashed #0005;
+    border-bottom: 1px dashed #0005;
 }
 
 .no-wall-left {
-  border-left: 1px dashed #0005;
+    border-left: 1px dashed #0005;
+}
+
+.door-top {
+    border-top: 4px solid #8b4513;
+}
+
+.door-right {
+    border-right: 4px solid #8b4513;
+}
+
+.door-bottom {
+    border-bottom: 4px solid #8b4513;
+}
+
+.door-left {
+    border-left: 4px solid #8b4513;
+}
+
+.shelf {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f4a460;
+}
+
+.shelf-top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 25%;
+}
+
+.shelf-right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 25%;
+}
+
+.shelf-bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 25%;
+}
+
+.shelf-left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 25%;
 }

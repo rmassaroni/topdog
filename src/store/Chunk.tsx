@@ -1,52 +1,42 @@
 import React from 'react';
-import { IChunk, WallType } from './types';
+import { IChunk, WallType, ShelfLocation } from './types';
+import './Store.css';
 
 const Chunk = (
     type: 'shelf' | 'cash register' | 'door' | 'empty' = 'empty',
-    // walls: { top: boolean; right: boolean; bottom: boolean; left: boolean } = { top: false, right: false, bottom: false, left: false }
-    walls: WallType[] = ['empty', 'empty', 'empty', 'empty']
+    walls: WallType[] = ['empty', 'empty', 'empty', 'empty'],
+    shelfLocation: ShelfLocation = 'none'
 ): IChunk => {
     const sqft = 10;
     const length = 10;
     const width = 10;
     const empty = true;
 
+    const wallSides = ['top', 'right', 'bottom', 'left'];
+    const wallClasses = wallSides.map((side, index) => {
+        const wallType = walls[index];
+        if (wallType === 'empty') return `no-wall-${side}`;
+        if (wallType === 'wall') return `wall-${side}`;
+        if (wallType === 'door') return `door-${side}`;
+    }).join(' ');
 
-
-  const wallSides = ['top', 'right', 'bottom', 'left'];
-  const wallClasses = wallSides.map((side, index) => {
-    const wallType = walls[index];
-    if (wallType === 'empty') return `wall-${side}`;
-    if (wallType === 'wall') return `no-wall-${side}`;
-    if (wallType === 'door') return `door-${side}`;
-  }).join(' ');
-
-
-
-
-
-    // const component = (): JSX.Element => (
-    //                 <div className={`store-item-container ${walls[0] === 'wall' ? 'wall-top' : 'no-wall-top'} ${walls[1] === 'wall' ? 'wall-right' : 'no-wall-right'} ${walls[2] === 'wall' ? 'wall-bottom' : 'no-wall-bottom'} ${walls[3] === 'wall' ? 'wall-left' : 'no-wall-left'}`}>
-    //         <div className={`store-item ${type}`}>
-    //             {type !== 'empty' && type}
-    //         </div>
-    //     </div>
-    // );
     const component = (): JSX.Element => (
-    <div className={`store-item-container ${wallClasses}`}>
-      <div className={`store-item ${type}`}>
-        {type !== 'empty' && type}
-      </div>
-    </div>
-  );
+        <div className={`store-item-container ${wallClasses}`}>
+            <div className={`store-item`}>
+                {type !== 'empty' && shelfLocation !== 'none' && <div className={`shelf shelf-${shelfLocation}`}></div>}
+            </div>
+        </div>
+    );
 
+                // {type !== 'empty' && type}
     return {
         component,
         length,
         width,
         empty,
         type,
-        walls
+        walls,
+        shelfLocation
     }
 };
 
