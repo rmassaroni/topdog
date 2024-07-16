@@ -164,3 +164,32 @@
     font-size: small;
     margin-left: 5px;
 }
+
+.store-container {
+  display: grid;
+  gap: 0px;
+  border: 2px solid #333;
+  padding: 0px;
+}
+
+.store-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+  font-size: 0.8rem;
+    aspect-ratio: 1 / 1;
+}
+
+.door {
+  background-color: #8b4513;
+}
+
+.cash-register {
+  background-color: #c0c0c0;
+}
+
+.shelf {
+  background-color: #f4a460;
+}
+

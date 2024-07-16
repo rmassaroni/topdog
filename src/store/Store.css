@@ -1,0 +1,32 @@
+.wall-top {
+  border-top: 2px solid #000;
+}
+
+.wall-right {
+  border-right: 2px solid #000;
+}
+
+.wall-bottom {
+  border-bottom: 2px solid #000;
+}
+
+.wall-left {
+  border-left: 2px solid #000;
+}
+
+/* No-wall styles */
+.no-wall-top {
+  border-top: 1px dotted #000;
+}
+
+.no-wall-right {
+  border-right: 1px dotted #000;
+}
+
+.no-wall-bottom {
+  border-bottom: 1px dotted #000;
+}
+
+.no-wall-left {
+  border-left: 1px dotted #000;
+}
