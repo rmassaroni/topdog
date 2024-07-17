@@ -1,5 +1,4 @@
-import { Comp, AssetType } from '../types';
-import { Product } from '../inventory/Product';
+import { Comp } from '../types';
 
 export type ChunkType = 'shelf' | 'cash register' | 'door' | 'empty';
 export type WallType = 'empty' | 'wall' | 'door';
@@ -19,8 +18,4 @@ export interface IStore extends Comp {
     chunks: IChunk[][];
     width: number;
     length: number;
-}
-
-export interface IShelf extends Comp {
-    products: Product[];
 }
