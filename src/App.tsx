@@ -59,7 +59,7 @@ const App: React.FC = () => {
     // );
     return (
         <div style={{ width: "500px", height: "500px"}}>
-            {Store(5, 5)}
+            {Store(5, 5).component()}
         </div>
     );
 }

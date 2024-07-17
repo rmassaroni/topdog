@@ -1,4 +1,4 @@
-import Asset from '../accounts/assets/Assets';
+import Asset from '../../accounts/assets/Assets';
 import { IPPE, IProperty } from './types';
 
 const PPE = (): IPPE => {
@@ -6,7 +6,10 @@ const PPE = (): IPPE => {
 }
 
 export const Property = (): IProperty => {
-    return Asset(0, 'Property');
+    return {
+        ...Asset(0, 'Property'),
+        ppeType: 'Property'
+    }
 }
 
 export default PPE;

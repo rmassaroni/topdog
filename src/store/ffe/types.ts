@@ -1,19 +1,21 @@
 import { AssetType } from '../../types';
 
-export interface IPPE extends AssetType {
+export type PPEType = 'Property' | 'Plant' | 'FFE';
 
+export interface IPPE extends AssetType {
+    ppeType?: PPEType;
 };
 
 export interface IProperty extends IPPE {
-
+    ppeType: PPEType;
 };
 
 export interface IPlant extends IPPE {
-
+    ppeType: PPEType;
 };
 
 export interface IFFE extends IPPE {
-    
+    ppeType: PPEType;
 };
 
 export interface IFurniture extends IFFE {
