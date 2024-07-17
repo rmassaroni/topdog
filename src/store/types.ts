@@ -1,4 +1,4 @@
-import { Comp } from '../types';
+import { Comp, AssetType } from '../types';
 import { Product } from '../inventory/Product';
 
 export type ChunkType = 'shelf' | 'cash register' | 'door' | 'empty';
@@ -24,3 +24,12 @@ export interface IStore extends Comp {
 export interface IShelf extends Comp {
     products: Product[];
 }
+
+
+export interface IProperty extends AssetType {
+
+};
+
+export interface IEquipment extends AssetType {
+    
+};
