@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { IChunk } from './types';
+import { IChunk, IStore } from './types';
 import Chunk from './Chunk';
 import './Store.css';
 
-const Store = (plotLength: number = 1, plotWidth: number = 1) => {
+const Store = (plotLength: number = 1, plotWidth: number = 1): IStore => {
     const generateChunks = (rows: number, cols: number): IChunk[][] => {
         const chunks: IChunk[][] = [];
         for (let i = 0; i < rows; i++) {
@@ -42,7 +42,7 @@ const Store = (plotLength: number = 1, plotWidth: number = 1) => {
 
     const [chunks] = useState<IChunk[][]>(generateChunks(plotLength, plotWidth));
 
-    return (
+    const component = () => (
         <div className="store-container" style={{ gridTemplateRows: `repeat(${plotLength}, 1fr)`, gridTemplateColumns: `repeat(${plotWidth}, 1fr)` }}>
             {chunks.map((row, rowIndex) => (
                 row.map((chunk, colIndex) => (
@@ -53,6 +53,13 @@ const Store = (plotLength: number = 1, plotWidth: number = 1) => {
             ))}
         </div>
     );
+
+    return {
+        component,
+        chunks,
+        length,
+        width,
+    };
 };
 
 export default Store;

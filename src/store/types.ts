@@ -13,3 +13,9 @@ export interface IChunk extends Comp {
     walls: WallType[];
     shelfLocation: ShelfLocation;
 }
+
+export interface IStore extends Comp {
+    chunks: IChunk[][];
+    width: number;
+    length: number;
+}
