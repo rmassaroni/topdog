@@ -13,19 +13,3 @@ export interface IProperty extends IPPE {
 export interface IPlant extends IPPE {
     ppeType: PPEType;
 };
-
-export interface IFFE extends IPPE {
-    ppeType: PPEType;
-};
-
-export interface IFurniture extends IFFE {
-
-};
-
-export interface IFixture extends IFFE {
-
-};
-
-export interface IEquipment extends IFFE {
-    
-};
