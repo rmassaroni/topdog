@@ -28,7 +28,6 @@ const Chunk = (
         </div>
     );
 
-                // {type !== 'empty' && type}
     return {
         component,
         length,
