@@ -1,0 +1,20 @@
+.full-shelf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+    width: 500px;
+    height: 500px;
+    flex-direction: column;
+}
+
+.shelf-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}

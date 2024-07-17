@@ -11,6 +11,7 @@ import Inventory from './inventory/Inventory';
 import { Clientele } from './clientele/Clientele';
 import { CashType } from './types';
 import Store from './store/Store';
+import Shelf from './store/ppe/ffe/Shelf';
 
 const App: React.FC = () => {
     const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
@@ -59,7 +60,12 @@ const App: React.FC = () => {
     // );
     return (
         <div style={{ width: "500px", height: "500px"}}>
+            <div>
             {Store(5, 5).component()}
+            </div>
+            <div>
+                {Shelf(5, products).fullView()}
+            </div>
         </div>
     );
 }

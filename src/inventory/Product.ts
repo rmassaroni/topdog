@@ -7,8 +7,9 @@ export class Product {
     private marketValue: number;
     private demand: number;
     private demandedPrice: number;
+    private _shelfSpace: number; //cubic feet
 
-    constructor(name: string, value: number) {
+    constructor(name: string, value: number, shelfSpace: number = 1) {
         this.name = name;
         this.value = value;
         this.icon = '🍔';
@@ -17,6 +18,7 @@ export class Product {
         this.marketValue = value;
         this.demand = 0;
         this.demandedPrice = this.marketValue;
+        this._shelfSpace = shelfSpace;
     }
 
     getName(): string {
@@ -84,6 +86,10 @@ export class Product {
             const demand: number = 1 * Math.pow(1 - (price - this.marketValue) / this.marketValue, 2);
             return Math.max(demand, 0);
         }
+    }
+
+    get shelfSpace(): number {
+        return this.shelfSpace;
     }
 }
 
