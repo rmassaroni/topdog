@@ -25,11 +25,30 @@ export interface IShelf extends Comp {
     products: Product[];
 }
 
-
-export interface IProperty extends AssetType {
+export interface IPPE extends AssetType {
 
 };
 
-export interface IEquipment extends AssetType {
+export interface IProperty extends IPPE {
+
+};
+
+export interface IPlant extends IPPE {
+
+};
+
+export interface IFFE extends IPPE {
+    
+};
+
+export interface IFurniture extends IFFE {
+
+};
+
+export interface IFixture extends IFFE {
+
+};
+
+export interface IEquipment extends IFFE {
     
 };
