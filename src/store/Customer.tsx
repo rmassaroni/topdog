@@ -45,7 +45,7 @@ export default class Customer extends React.Component<CustomerProps> implements 
         return false;
     }
 
-    public render() {
+    public render(): JSX.Element {
         const { position, style } = this.props;
         return (
             <div
