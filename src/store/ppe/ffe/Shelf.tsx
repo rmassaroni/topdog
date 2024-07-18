@@ -14,7 +14,7 @@ const Shelf = (initialValue: number = 0, products: Product[]): IShelf => {
     const generateShelves = (): iShelfRow[] => {
         const newShelves = [];
         for (let i = 0; i < numShelves; i++) {
-            newShelves.push(ShelfRow(width, height, depth));
+            newShelves.push(ShelfRow(10, height, depth));
         }
         return newShelves;
     }

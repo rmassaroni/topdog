@@ -1,20 +1,22 @@
 .full-shelf {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
     width: 500px;
     height: 500px;
     flex-direction: column;
+    border: 2px solid black;
 }
 
 .shelf-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+    border: 1px solid grey;
+    box-sizing: border-box;
 }
