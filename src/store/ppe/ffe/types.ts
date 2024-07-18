@@ -44,5 +44,5 @@ export interface iItemSpace extends Comp {
     width: number;
     height: number;
     depth: number;
-    items: Product[];
+    item: Product;
 }

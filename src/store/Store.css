@@ -3,6 +3,7 @@
     gap: 0px;
     /* border: 2px solid #333; */
     padding: 0px;
+    position: relative;
 }
 
 .store-item-container {
@@ -125,4 +126,25 @@
     transform: translateY(-50%);
     height: 100%;
     width: 25%;
+}
+
+.customer {
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.1s ease-in-out;
+    transform: translate(-50%, -50%);
+
+}
+
+.controls {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+button {
+    margin: 5px;
 }

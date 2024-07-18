@@ -61,13 +61,15 @@ const App: React.FC = () => {
     return (
         <div style={{ width: "500px", height: "500px"}}>
             <div>
-            {Store(5, 5).component()}
+{Store(5, 5).component()}
             </div>
             <div>
-                {Shelf(5, products).fullView()}
+                
             </div>
         </div>
     );
+        //{Store(5, 5).component()}
+    //{Shelf(5, products).fullView()}
 }
 
 export default App;
