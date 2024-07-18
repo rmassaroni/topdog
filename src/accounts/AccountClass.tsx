@@ -1,12 +1,14 @@
 import React from 'react';
 import { USD } from '../utils';
-import { iAccount } from './types';
+import { AccountType, DueType, iAccount } from './types';
 
 export default class Account implements iAccount {
+    public readonly accountType?: AccountType;
+    public readonly dueType?: DueType;
     private _name: string;
     private _value: number;
 
-    constructor(initialValue: number = 0, initialName: string = 'Account') {
+    public constructor(initialValue: number = 0, initialName: string = 'Account') {
         this._name = initialName;
         this._value = initialValue;
     }
