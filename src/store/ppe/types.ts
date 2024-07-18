@@ -7,9 +7,9 @@ export interface IPPE extends AssetType {
 };
 
 export interface IProperty extends IPPE {
-    ppeType: PPEType;
+    ppeType: 'Property';
 };
 
 export interface IPlant extends IPPE {
-    ppeType: PPEType;
+    ppeType: 'Plant';
 };

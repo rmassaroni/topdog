@@ -6,20 +6,21 @@ export type FFEType = 'Furniture' | 'Fixture' | 'Equipment';
 export type FurnitureType = 'Shelf' | 'Register';
 
 export interface IFFE extends IPPE {
-    ppeType: PPEType;
+    ppeType: 'FFE';
     ffeType?: FFEType;
 };
 
 export interface IFurniture extends IFFE {
+    ffeType: 'Furniture';
     furnitureType?: FurnitureType;
 };
 
 export interface IFixture extends IFFE {
-
+    ffeType: 'Fixture';
 };
 
 export interface IEquipment extends IFFE {
-    
+    ffeType: 'Equipment';
 };
 
 export interface IShelf extends IFurniture {
@@ -36,6 +37,12 @@ export interface iShelfRow extends Comp {
     width: number;
     height: number;
     depth: number;
-    products: Product[];
+    products?: Product[];
 }
     
+export interface iItemSpace extends Comp {
+    width: number;
+    height: number;
+    depth: number;
+    items: Product[];
+}

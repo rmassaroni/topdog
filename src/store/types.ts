@@ -9,13 +9,17 @@ export interface IChunk extends Comp {
     length: number;
     width: number;
     empty: boolean;
-    type?: ChunkType;
-    walls: WallType[];
-    shelfLocation: ShelfLocation;
 }
 
 export interface IStore extends Comp {
     chunks: IChunk[][];
     width: number;
     length: number;
+}
+
+export interface iFloorSpace extends IChunk {
+    // type: 'empty';
+    type?: ChunkType;
+    walls: WallType[];
+    shelfLocation: ShelfLocation;
 }

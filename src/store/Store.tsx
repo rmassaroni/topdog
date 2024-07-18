@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { IChunk, IStore } from './types';
-import Chunk from './Chunk';
+import { iFloorSpace, IStore } from './types';
+import FloorSpace from './FloorSpace';
 import './Store.css';
 
 const Store = (plotLength: number = 1, plotWidth: number = 1): IStore => {
-    const generateChunks = (rows: number, cols: number): IChunk[][] => {
-        const chunks: IChunk[][] = [];
+    const generateChunks = (rows: number, cols: number): iFloorSpace[][] => {
+        const chunks: iFloorSpace[][] = [];
         for (let i = 0; i < rows; i++) {
-            const row: IChunk[] = [];
+            const row: iFloorSpace[] = [];
             for (let j = 0; j < cols; j++) {
                 let walls: 'empty' | 'wall' | ('door' | 'empty' | 'wall')[] = ['empty', 'empty', 'empty', 'empty'];
 
@@ -30,7 +30,7 @@ const Store = (plotLength: number = 1, plotWidth: number = 1): IStore => {
                 if (i === 4) position = 'bottom';
                 if (j === 0) position = 'left';
 
-                row.push(Chunk(type, walls, position));
+                row.push(FloorSpace(type, walls, position));
             }
             chunks.push(row);
         }
@@ -40,7 +40,7 @@ const Store = (plotLength: number = 1, plotWidth: number = 1): IStore => {
     const [length, setLength] = useState<number>(plotLength);
     const [width, setWidth] = useState<number>(plotWidth);
 
-    const [chunks] = useState<IChunk[][]>(generateChunks(plotLength, plotWidth));
+    const [chunks] = useState<iFloorSpace[][]>(generateChunks(plotLength, plotWidth));
 
     const component = () => (
         <div className="store-container" style={{ gridTemplateRows: `repeat(${plotLength}, 1fr)`, gridTemplateColumns: `repeat(${plotWidth}, 1fr)` }}>
