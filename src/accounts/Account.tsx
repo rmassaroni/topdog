@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { AccountType } from '../types';
+import { iAccount } from './types';
 import { USD } from '../utils';
 
-const Account = (initialValue: number = 0, initialName: string = 'Account'): AccountType => {
+const Account = (initialValue: number = 0, initialName: string = 'Account'): iAccount => {
     const [name, setName] = useState<string>(initialName);
     const [value, setValue] = useState<number>(initialValue);
-    const [exists, setExists] = useState<boolean>(initialValue > 0);
 
     const usd = (val: number = value): string => USD(val);
 
     const fullName = () => `${name}: ${usd()}`;
+
+    const exists = (): boolean => value > 0;
 
     const component = () => (
         <div className="asset-square">
@@ -20,17 +21,14 @@ const Account = (initialValue: number = 0, initialName: string = 'Account'): Acc
 
     return {
         component,
-        name,
-        value,
+        name, setName,
+        value, setValue,
         exists,
-        setName,
-        setValue,
-        setExists,
         usd,
         fullName
-        // usd: (val: number = value): string => USD(val),
-        // fullName: (): string => `${name}: ${USD(value)}`
     };
 };
 
 export default Account;
+
+

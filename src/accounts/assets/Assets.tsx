@@ -1,16 +1,16 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Account from '../Account';
-import { AssetType, CashType } from '../../types';
+import { iAccountsReceivable, iAsset, iCash } from './types';
 
-const Asset = (initialValue: number = 0, initialName: string = 'Asset'): AssetType => {
+const Asset = (initialValue: number = 0, initialName: string = 'Asset'): iAsset => {
     return {
         ...Account(initialValue, initialName),
         type: 'Asset'
     };
 };
 
-export const Cash = (initialValue: number = 0): CashType => {
+export const Cash = (initialValue: number = 0): iCash => {
     const asset = Asset(initialValue, 'Cash');
     const spendCash = (amount: number): boolean => {
         if (amount > asset.value) {
@@ -34,7 +34,7 @@ export const Cash = (initialValue: number = 0): CashType => {
     }
 }
 
-export const AccountsReceivable = (initialValue: number = 0): AssetType => {
+export const AccountsReceivable = (initialValue: number = 0): iAccountsReceivable => {
     return Asset(initialValue, 'Accounts Receivable');
 }
 

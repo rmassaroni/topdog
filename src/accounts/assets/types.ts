@@ -1,3 +1,4 @@
+import { Product } from '../../inventory/Product';
 import { iAccount, AccountType } from '../types';
 
 export interface iAsset extends iAccount {
@@ -9,4 +10,11 @@ export interface iCash extends iAsset {
 }
 
 export interface iAccountsReceivable extends iAsset {
+}
+
+export interface InventoryType extends iAsset {
+    products: Product[];
+    buy: (product: Product, quantity: number) => void;
+    sell: (index: number) => void;
+    panel: () => JSX.Element;
 }

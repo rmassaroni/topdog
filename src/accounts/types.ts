@@ -3,13 +3,15 @@ export type AccountType = 'Asset' | 'Liability' | 'Equity';
 export type DueType = 'Current' | 'Long-term';
 
 export interface iAccount {
-    accountType?: AccountType;
-    dueType?: DueType;
     name: string;
     value: number;
+    accountType?: AccountType;
+    dueType?: DueType;
+    setName: (newName: string) => void;
+    setValue: (newValue: number) => void;
     usd(val: number): string;
-    exists(): boolean;
     fullName(): string;
+    exists(): boolean;
     component(): JSX.Element;
 }
 
