@@ -12,6 +12,7 @@ import { Clientele } from './clientele/Clientele';
 import { CashType } from './types';
 import Store from './store/Store';
 import Shelf from './store/ppe/ffe/Shelf';
+import User from './User';
 
 const App: React.FC = () => {
     const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
@@ -64,6 +65,7 @@ const App: React.FC = () => {
 {Store(5, 5).component()}
             </div>
             <div>
+                <User />
                 
             </div>
         </div>

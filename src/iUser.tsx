@@ -1,9 +1,9 @@
 import Cash from './accounts/assets/AssetClass';
 
 export default interface iUser {
-    username: string;
+    // username: string;
     cash: Cash;
-    inv: InventoryType;
-    store: StoreType;
+    // inv: InventoryType;
+    // store: StoreType;
 
 }
