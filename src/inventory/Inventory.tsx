@@ -3,11 +3,12 @@ import { Product } from './Product';
 import { useState } from 'react';
 import Asset from '../accounts/assets/Assets';
 import { toast } from 'react-toastify';
-import { CashType, InventoryType } from '../types';
 import { USD } from '../utils';
 import ProductList from './ProductList';
+import { iInventory } from './types';
+import { iCash } from '../accounts/assets/types';
 
-const Inventory = (initialValue = 0, initialProducts = [], cash: CashType ): InventoryType => {
+const Inventory = (initialValue = 0, initialProducts = [], cash: iCash ): iInventory => {
     const [ totalValue, setTotalValue ] = useState<number>(initialValue);
     const [ products, setProducts ] = useState<Product[]>(initialProducts);
     const [manager, setManager] = useState<boolean>(false);

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { USD } from '../../utils';
-import { AccountType, AssetType, CashType, InventoryType, TotalType } from '../../types';
+import { iAccount, iTotal } from '../types';
+import { iCash, iAccountsReceivable, iAsset } from './types';
 
 
-const TotalAssets = (cash: CashType, ar: AssetType, inv: InventoryType): TotalType => {
-    const [accounts, setAccounts] = useState<AccountType[]>([cash, ar, inv]);
+const TotalAssets = (cash: iCash, ar: iAccountsReceivable, inv: iAsset): iTotal => {
+    const [accounts, setAccounts] = useState<iAccount[]>([cash, ar, inv]);
 
-    const updateAccounts = (newAccounts: AccountType[]): AccountType[] => {
+    const updateAccounts = (newAccounts: iAccount[]): iAccount[] => {
         setAccounts(newAccounts);
         return newAccounts;
     }
@@ -35,7 +36,7 @@ const TotalAssets = (cash: CashType, ar: AssetType, inv: InventoryType): TotalTy
         )
     };
     return {
-        type: 'Asset',
+        accountType: 'Asset',
         component,
         accounts,
         updateAccounts,

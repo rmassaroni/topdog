@@ -13,29 +13,30 @@ import { CashType } from './types';
 import Store from './store/Store';
 import Shelf from './store/ppe/ffe/Shelf';
 import User from './User';
+import { iCash } from './accounts/assets/types';
 
 const App: React.FC = () => {
-    const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
-
-    const cash: CashType = Cash(1000);
-    const ap = AccountsPayable(0);
-    const inv = Inventory(0, [], cash);
-    const clientele = Clientele(inv);
-    const assets = TotalAssets(cash, AccountsReceivable(), inv);
-    const liabilities = TotalLiabilities(ap);
-    const bs = BalanceSheet(assets, liabilities);
-
-    const products: Product[] = [
-        new Product('Product A', 50),
-        new Product('Product B', 75),
-        new Product('Product C', 100),
-    ];
-
-    const handleLoan = (loanAmount: number = 100) => {
-        cash.setValue(cash.value + loanAmount);
-        ap.setValue(ap.value + loanAmount);
-        ap.setExists(true);
-    }
+    // const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
+    //
+    // const cash: iCash = Cash(1000);
+    // const ap = AccountsPayable(0);
+    // const inv = Inventory(0, [], cash);
+    // const clientele = Clientele(inv);
+    // const assets = TotalAssets(cash, AccountsReceivable(), inv);
+    // const liabilities = TotalLiabilities(ap);
+    // const bs = BalanceSheet(assets, liabilities);
+    //
+    // const products: Product[] = [
+    //     new Product('Product A', 50),
+    //     new Product('Product B', 75),
+    //     new Product('Product C', 100),
+    // ];
+    //
+    // const handleLoan = (loanAmount: number = 100) => {
+    //     cash.setValue(cash.value + loanAmount);
+    //     ap.setValue(ap.value + loanAmount);
+    //     ap.setExists(true);
+    // }
 
     // return (
     //     <div style={{ display: "flex" }}>

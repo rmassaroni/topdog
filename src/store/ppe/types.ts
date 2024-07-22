@@ -1,8 +1,8 @@
-import { AssetType } from '../../types';
+import { iAsset } from '../../accounts/assets/types';
 
 export type PPEType = 'Property' | 'Plant' | 'FFE';
 
-export interface IPPE extends AssetType {
+export interface IPPE extends iAsset {
     ppeType?: PPEType;
 };
 
