@@ -10,9 +10,7 @@ import Market from './supplyChain/Market';
 import Inventory from './inventory/Inventory';
 import { Clientele } from './clientele/Clientele';
 // import { CashType } from './types';
-import Store from './store/Store';
-import Shelf from './store/ppe/ffe/Shelf';
-import User from './User';
+// import User from './User';
 import { iCash } from './accounts/assets/types';
 
 const App: React.FC = () => {
@@ -63,10 +61,8 @@ const App: React.FC = () => {
     return (
         <div style={{ width: "500px", height: "500px"}}>
             <div>
-{Store(5, 5).component()}
             </div>
             <div>
-                <User />
                 
             </div>
         </div>
