@@ -5,19 +5,21 @@ export type WallType = 'empty' | 'wall' | 'door';
 export type ShelfLocation = 'none' | 'top' | 'bottom' | 'left' | 'right';
 export type ItemType = 'shelf' | 'cash register' | 'door' | 'empty';
 
-export interface IChunk extends Comp {
+export interface iChunk extends Comp {
     length: number;
     width: number;
     empty: boolean;
 }
 
 export interface iStore extends Comp {
-    chunks: IChunk[][];
+    chunks: iChunk[][];
     width: number;
     length: number;
+    setWidth: (width: number) => void;
+    setLength: (length: number) => void;
 }
 
-export interface iFloorSpace extends IChunk {
+export interface iFloorSpace extends iChunk {
     // type: 'empty';
     type?: ChunkType;
     walls: WallType[];

@@ -1,8 +1,8 @@
 import React from 'react';
-import { IChunk } from './types';
+import { iChunk } from './types';
 import './Store.css';
 
-const Chunk = (): IChunk => {
+const Chunk = (): iChunk => {
     const sqft = 10;
     const length = 10;
     const width = 10;

@@ -39,7 +39,7 @@ const Clientele = ( inv: iInventory ): iClientele => {
                     return newCount;
                 });
                 setCurrentCustomers((prevCustomers) => {
-                    const newCustomers = [...prevCustomers, new Customer('Customer ' + (customerCountRef.current))];
+                    const newCustomers = [...prevCustomers, new Customer({position: {row: 1, col: 1}}, 'Customer ' + (customerCountRef.current))];
                     currentCustomersRef.current = newCustomers;
                     return newCustomers;
                 });

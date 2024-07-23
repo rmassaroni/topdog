@@ -1,7 +1,7 @@
-import React from 'react';
-import './Store.css';
 import { Product } from '../inventory/Product';
 import { ICustomer } from '../types';
+import React from 'react';
+import '../store/Store.css'; //will move
 
 interface CustomerProps {
     position: { row: number; col: number };
@@ -36,12 +36,12 @@ export default class Customer extends React.Component<CustomerProps> implements 
     public tryBuy(product: Product): boolean {
         const randomValue: number = Math.random();
         const bought: boolean = randomValue <= product.getDemand();
-        this._attemptedProducts.push({ product, bought });
+        this.attemptedProducts.push({ product, bought });
         if (bought) {
-            console.log(`${this._name} bought ${product.getName()} with demand ${product.getDemand()}.`);
+            console.log(`${this.name} bought ${product.getName()} with demand ${product.getDemand()}.`);
             return true;
         }
-        console.log(`${this._name} did not buy ${product.getName()} with demand ${product.getDemand()}.`);
+        console.log(`${this.name} did not buy ${product.getName()} with demand ${product.getDemand()}.`);
         return false;
     }
 
@@ -55,8 +55,7 @@ export default class Customer extends React.Component<CustomerProps> implements 
                     gridRow: position.row + 1,
                     gridColumn: position.col + 1,
                 }}
-            >
-            </div>
+            ></div>
         );
     }
 }
