@@ -8,3 +8,4 @@ export * from './accounts/assets/types';
 export * from './accounts/liabilities/types';
 export * from './inventory/types';
 export * from './clientele/types';
+export * from './store/types';

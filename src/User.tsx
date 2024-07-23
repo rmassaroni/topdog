@@ -8,10 +8,18 @@ import TotalLiabilities from './accounts/liabilities/TotalLiabilities';
 import BalanceSheet from './accounts/BalanceSheet';
 import { Clientele } from './clientele/Clientele';
 import Store from './store/Store';
-import { iCash, iInventory } from './types';
+import { iCash, iInventory, iAccountsPayable, iTotal, iClientele, iStore } from './types';
 
 interface iUser {
     username: string;
+    cash: iCash;
+    inv: iInventory;
+    ap: iAccountsPayable;
+    assets: iTotal;
+    clientele: iClientele;
+    liabilities: iTotal;
+    bs: JSX.Element;
+    store: iStore;
 }
 
 interface UserProps {

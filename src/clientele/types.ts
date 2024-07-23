@@ -2,7 +2,7 @@ import { Comp } from "../types";
 import Customer from "./Customer";
 import { Product } from "../inventory/Product";
 
-export interface ClienteleType extends Comp {
+export interface iClientele extends Comp {
     storePopularity: number;
     setStorePopularity: (value: number) => void;
     currentCustomers: Customer[];

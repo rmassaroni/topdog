@@ -11,7 +11,7 @@ export interface IChunk extends Comp {
     empty: boolean;
 }
 
-export interface IStore extends Comp {
+export interface iStore extends Comp {
     chunks: IChunk[][];
     width: number;
     length: number;

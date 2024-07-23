@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { iInventory } from '../inventory/types';
-import { ClienteleType } from '../types';
+import { iClientele } from '../types';
 import Customer from './Customer';
 
-const Clientele = ( inv: iInventory ): ClienteleType => {
+const Clientele = ( inv: iInventory ): iClientele => {
     const [storePopularity, setStorePopularity] = useState<number>(0.2);
     const [currentCustomers, setCurrentCustomers] = useState<Customer[]>([]);
     const [customerCount, setCustomerCount] = useState<number>(0);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { iFloorSpace, IStore } from './types';
+import { iFloorSpace, iStore } from './types';
 import FloorSpace from './FloorSpace';
 import './Store.css';
 import Customer from './Customer';
@@ -37,7 +37,7 @@ const generateChunks = (rows: number, cols: number): iFloorSpace[][] => {
     return chunks;
 };
 
-const Store = (plotLength: number = 1, plotWidth: number = 1): IStore => {
+const Store = (plotLength: number = 1, plotWidth: number = 1): iStore => {
     const [length, setLength] = useState<number>(plotLength);
     const [width, setWidth] = useState<number>(plotWidth);
     const [customerPosition, setCustomerPosition] = useState<{ row: number; col: number }>({ row: 4, col: 2 });
