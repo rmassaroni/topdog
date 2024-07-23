@@ -1,9 +1,11 @@
 import React from 'react';
+import User from './User';
 
 const App: React.FC = () => {
+    const usr = User({});
     return (
         <div>
-        <h1>My App</h1>
+        <h1>{usr.username}</h1>
         </div>
     );
     };

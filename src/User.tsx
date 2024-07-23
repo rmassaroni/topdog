@@ -13,14 +13,16 @@ import BalanceSheet from './accounts/BalanceSheet';
 
 interface iUser {
     username: string;
-    store: IStore;
+}
+
+interface UserProps {
+    username?: string;
 }
 
 
-const User = () => {
+const User = ({ username = "username" }: UserProps) => {
     const cash: iCash = Cash(1000);
     const inv: iInventory = Inventory(0, [], cash);
-    const [acceptCredit, setAcceptCredit] = useState<boolean>(false);
     const ap = AccountsPayable(0);
     const assets = TotalAssets(cash, AccountsReceivable(), inv);
     // const clientele = Clientele(inv);
@@ -33,19 +35,11 @@ const User = () => {
         new Product('Product C', 100),
     ];
 
-    // const handleLoan = (loanAmount: number = 100) => {
-    //     cash.setValue(cash.value + loanAmount);
-    //     ap.setValue(ap.value + loanAmount);
-    //     ap.setExists(true);
-    // }
-    
-
-
-    return (
-        <div>
-            <p>{cash.fullName()}</p>
-        </div>
-    )
+    return {
+        username,
+        cash,
+        inv,
+    }
 }
 
 export default User;
