@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { USD } from '../../utils';
 import { iAccount, iTotal } from '../types';
 import { iCash, iAccountsReceivable, iAsset } from './types';
+import '../../App.css'
 
 
 const TotalAssets = (cash: iCash, ar: iAccountsReceivable, inv: iAsset): iTotal => {
