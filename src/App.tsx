@@ -21,6 +21,7 @@ const App: React.FC = () => {
                 <h1>Financial Statements</h1>
             {usr.bs.component()}
             </div>
+            <div style={{ width: "50%"}}>{usr.store.component()}</div>
         </div>
     );
 };
