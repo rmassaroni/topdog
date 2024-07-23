@@ -12,7 +12,7 @@ export interface iCash extends iAsset {
 export interface iAccountsReceivable extends iAsset {
 }
 
-export interface InventoryType extends iAsset {
+export interface iInventory extends iAsset {
     products: Product[];
     buy: (product: Product, quantity: number) => void;
     sell: (index: number) => void;

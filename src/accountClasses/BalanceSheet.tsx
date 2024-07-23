@@ -1,4 +1,4 @@
-import { TotalType } from "../types";
+import { TotalType } from "../oldTypes";
 import React from 'react';
 
 

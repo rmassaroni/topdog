@@ -1,9 +1,9 @@
-import { AssetType } from '../types';
+import { iAsset } from "../accounts/assets/types";
 
-export interface IProperty extends AssetType {
+export interface IProperty extends iAsset {
 
 };
 
-export interface IEquipment extends AssetType {
+export interface IEquipment extends iAsset {
     
 };

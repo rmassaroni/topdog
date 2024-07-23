@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CashType, InventoryType } from '../types';
+import { iCash } from '../accounts/assets/types';
 import { Product } from '../inventory/Product';
+import { iInventory } from '../inventory/types';
 
 interface MarketProps {
     products: Product[];
-    cash: CashType;
-    inv: InventoryType;
+    cash: iCash;
+    inv: iInventory;
 }
 
 const Market: React.FC<MarketProps> = ({ products, cash, inv }) => {

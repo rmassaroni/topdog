@@ -8,6 +8,8 @@ import { iInventory } from './inventory/types';
 import { AccountsPayable } from './accounts/liabilities/Liabilities';
 import TotalAssets from './accounts/assets/TotalAssets';
 import { AccountsReceivable } from './accounts/assets/Assets';
+import TotalLiabilities from './accounts/liabilities/TotalLiabilities';
+import BalanceSheet from './accounts/BalanceSheet';
 
 interface iUser {
     username: string;
@@ -22,8 +24,8 @@ const User = () => {
     const ap = AccountsPayable(0);
     const assets = TotalAssets(cash, AccountsReceivable(), inv);
     // const clientele = Clientele(inv);
-    // const liabilities = TotalLiabilities(ap);
-    // const bs = BalanceSheet(assets, liabilities);
+    const liabilities = TotalLiabilities(ap);
+    const bs = BalanceSheet(assets, liabilities);
 
     const products: Product[] = [
         new Product('Product A', 50),
