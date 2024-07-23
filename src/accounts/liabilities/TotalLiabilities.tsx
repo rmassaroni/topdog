@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { AccountType, LiabilityType, TotalType } from '../../types';
 import { USD } from '../../utils';
+import { iAccount, iTotal } from '../types';
+import { iLiability } from './types';
 
 
-const TotalLiabilities = (ap: LiabilityType): TotalType => {
-    const [accounts, setAccounts] = useState<AccountType[]>([ap]);
+const TotalLiabilities = (ap: iLiability): iTotal => {
+    const [accounts, setAccounts] = useState<iAccount[]>([ap]);
 
-    const updateAccounts = (newAccounts: AccountType[]): AccountType[] => {
+    const updateAccounts = (newAccounts: iAccount[]): iAccount[] => {
         setAccounts(newAccounts);
         return newAccounts;
     }
@@ -35,7 +36,7 @@ const TotalLiabilities = (ap: LiabilityType): TotalType => {
 
     return {
         component,
-        type: 'Liability',
+        accountType: 'Liability',
         accounts,
         updateAccounts,
         totalValue,
