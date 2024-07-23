@@ -1,6 +1,5 @@
 import { Cash } from './accounts/assets/Assets';
 import Inventory from './inventory/Inventory';
-import { Product } from './inventory/Product';
 import { AccountsPayable } from './accounts/liabilities/Liabilities';
 import TotalAssets from './accounts/assets/TotalAssets';
 import { AccountsReceivable } from './accounts/assets/Assets';
@@ -8,7 +7,7 @@ import TotalLiabilities from './accounts/liabilities/TotalLiabilities';
 import BalanceSheet from './accounts/BalanceSheet';
 import { Clientele } from './clientele/Clientele';
 import Store from './store/Store';
-import { iCash, iInventory, iAccountsPayable, iTotal, iClientele, iStore } from './types';
+import { iCash, iInventory, iAccountsPayable, iTotal, iClientele, iStore, Comp } from './types';
 
 interface iUser {
     username: string;
@@ -18,7 +17,7 @@ interface iUser {
     assets: iTotal;
     clientele: iClientele;
     liabilities: iTotal;
-    bs: JSX.Element;
+    bs: Comp;
     store: iStore;
 }
 
@@ -26,22 +25,15 @@ interface UserProps {
     username?: string;
 }
 
-
-const User = ({ username = "username" }: UserProps) => {
+const User = ({ username = "username" }: UserProps): iUser => {
     const cash: iCash = Cash(1000);
     const inv: iInventory = Inventory(0, [], cash);
-    const ap = AccountsPayable(0);
-    const assets = TotalAssets(cash, AccountsReceivable(), inv);
-    const clientele = Clientele(inv);
-    const liabilities = TotalLiabilities(ap);
-    const bs = BalanceSheet(assets, liabilities);
-    const store = Store(5, 5);
-
-    const products: Product[] = [
-        new Product('Product A', 50),
-        new Product('Product B', 75),
-        new Product('Product C', 100),
-    ];
+    const ap: iAccountsPayable = AccountsPayable(0);
+    const assets: iTotal = TotalAssets(cash, AccountsReceivable(), inv);
+    const clientele: iClientele = Clientele(inv);
+    const liabilities: iTotal = TotalLiabilities(ap);
+    const bs: Comp = BalanceSheet(assets, liabilities);
+    const store: iStore = Store(5, 5);
 
     return {
         username,

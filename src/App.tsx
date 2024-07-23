@@ -1,8 +1,17 @@
 import React from 'react';
 import User from './User';
+import Market from './supplyChain/Market';
+import { Product } from './inventory/Product';
 
 const App: React.FC = () => {
     const usr = User({});
+    const products: Product[] = [
+        new Product('Product A', 50),
+        new Product('Product B', 75),
+        new Product('Product C', 100),
+    ];
+    const market = Market({ products: products, cash: usr.cash, inv: usr.inv});
+
     return (
         <div>
             <div>
