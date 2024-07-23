@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Cash } from './accounts/assets/Assets';
-import { IStore } from './store/types';
 import { iCash } from './accounts/assets/types';
 import Inventory from './inventory/Inventory';
 import { Product } from './inventory/Product';
