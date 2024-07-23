@@ -2,7 +2,7 @@ import { Product } from '../../inventory/Product';
 import { iAccount, AccountType } from '../types';
 
 export interface iAsset extends iAccount {
-    type: AccountType;
+    accountType: AccountType;
 }
 
 export interface iCash extends iAsset {

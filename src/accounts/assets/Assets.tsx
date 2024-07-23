@@ -6,7 +6,7 @@ import { iAccountsReceivable, iAsset, iCash } from './types';
 const Asset = (initialValue: number = 0, initialName: string = 'Asset'): iAsset => {
     return {
         ...Account(initialValue, initialName),
-        type: 'Asset'
+        accountType: 'Asset'
     };
 };
 

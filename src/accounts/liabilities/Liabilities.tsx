@@ -1,14 +1,14 @@
 import Account from '../Account';
-import { iAsset } from '../assets/types';
+import { iLiability, iAccountsPayable } from './types';
 
-const Liability = (initialValue: number = 0, initialName: string = 'Liability'): iAsset => {
+const Liability = (initialValue: number = 0, initialName: string = 'Liability'): iLiability => {
     return {
         ...Account(initialValue, initialName),
-        type: 'Liability'
+        accountType: 'Liability'
     };
 };
 
-export const AccountsPayable = (initialValue: number = 0): iAsset => {
+export const AccountsPayable = (initialValue: number = 0): iAccountsPayable => {
     return {
         ...Liability(initialValue, 'Accounts Payable'),
     }
