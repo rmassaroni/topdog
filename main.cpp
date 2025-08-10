@@ -1,0 +1,208 @@
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include "map.hpp"
+
+const int WINDOW_WIDTH = TILE_SIZE * MAP_WIDTH;
+const int WINDOW_HEIGHT = TILE_SIZE * MAP_HEIGHT;
+
+
+int main() {
+    // sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Simple RPG"); //limited screen
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Simple RPG", sf::Style::Fullscreen); //full screen
+
+    // Define simple textures with colors
+    // sf::RectangleShape wallTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    // wallTile.setFillColor(sf::Color::Blue);
+    //
+    // sf::RectangleShape floorTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    // floorTile.setFillColor(sf::Color(200, 200, 200));
+    //
+    sf::RectangleShape voidTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    voidTile.setFillColor(sf::Color(30, 30, 30)); // dark gray
+
+    sf::RectangleShape grassTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    grassTile.setFillColor(sf::Color(50, 180, 50)); // green
+
+    sf::RectangleShape roadTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    roadTile.setFillColor(sf::Color(60, 60, 60)); // dark grey
+
+    sf::RectangleShape sidewalkTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    sidewalkTile.setFillColor(sf::Color(180, 180, 180)); // light grey
+
+    sf::RectangleShape wallTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    wallTile.setFillColor(sf::Color(100, 100, 255)); // bluish wall
+
+    sf::RectangleShape doorTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    doorTile.setFillColor(sf::Color(139, 69, 19)); // brown
+
+    sf::RectangleShape windowTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    windowTile.setFillColor(sf::Color(173, 216, 230)); // light blue
+
+    sf::RectangleShape roofTile(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    roofTile.setFillColor(sf::Color(120, 0, 0)); // dark red
+
+
+    // Player setup
+    sf::RectangleShape player(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+    player.setFillColor(sf::Color::Red);
+    sf::Vector2i playerPos(1, 1); // grid position
+
+    window.setFramerateLimit(60);
+
+    generateMap();
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+                window.close();
+        }
+
+        // Movement
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && mapData[playerPos.y - 1][playerPos.x] == 0)
+            playerPos.y--;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && mapData[playerPos.y + 1][playerPos.x] == 0)
+            playerPos.y++;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && mapData[playerPos.y][playerPos.x - 1] == 0)
+            playerPos.x--;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && mapData[playerPos.y][playerPos.x + 1] == 0)
+            playerPos.x++;
+
+        // Calculate how many tiles fit on screen
+        int screenTilesX = window.getSize().x / TILE_SIZE;
+        int screenTilesY = window.getSize().y / TILE_SIZE;
+
+        int offsetX = (window.getSize().x - (MAP_WIDTH * TILE_SIZE)) / 2;
+        int offsetY = (window.getSize().y - (MAP_HEIGHT * TILE_SIZE)) / 2;
+
+
+        // player.setPosition(playerPos.x * TILE_SIZE, playerPos.y * TILE_SIZE);
+        
+
+
+        // Render
+        window.clear();
+
+        // // Draw the map
+        // for (int y = 0; y < MAP_HEIGHT; y++) {
+        //     for (int x = 0; x < MAP_WIDTH; x++) {
+        //         if (mapData[y][x] == 1) {
+        //             wallTile.setPosition(x * TILE_SIZE, y * TILE_SIZE);
+        //             window.draw(wallTile);
+        //         } else {
+        //             floorTile.setPosition(x * TILE_SIZE, y * TILE_SIZE);
+        //             window.draw(floorTile);
+        //         }
+        //     }
+        // }
+
+
+
+        // for (int y = 0; y < screenTilesY; y++) {
+        //     for (int x = 0; x < screenTilesX; x++) {
+        //         int tileType;
+        //
+        //         // If the tile is inside the map bounds, use actual map data
+        //         if (y < MAP_HEIGHT && x < MAP_WIDTH) {
+        //             tileType = mapData[y][x];
+        //         } else {
+        //             tileType = 1; // Out-of-bounds = wall
+        //         }
+        //
+        //         if (tileType == 1) {
+        //             wallTile.setPosition(x * TILE_SIZE, y * TILE_SIZE);
+        //             window.draw(wallTile);
+        //         } else {
+        //             floorTile.setPosition(x * TILE_SIZE, y * TILE_SIZE);
+        //             window.draw(floorTile);
+        //         }
+        //     }
+        // }
+
+        // for (int y = 0; y < screenTilesY; y++) {
+        //     for (int x = 0; x < screenTilesX; x++) {
+        //         int tileX = x - (screenTilesX - MAP_WIDTH) / 2;
+        //         int tileY = y - (screenTilesY - MAP_HEIGHT) / 2;
+        //
+        //         sf::Vector2f screenPos(x * TILE_SIZE, y * TILE_SIZE);
+        //
+        //         if (tileY >= 0 && tileY < MAP_HEIGHT && tileX >= 0 && tileX < MAP_WIDTH) {
+        //             int tileType = mapData[tileY][tileX];
+        //             if (tileType == 1) {
+        //                 wallTile.setPosition(screenPos);
+        //                 window.draw(wallTile);
+        //             } else {
+        //                 floorTile.setPosition(screenPos);
+        //                 window.draw(floorTile);
+        //             }
+        //         } else {
+        //             voidTile.setPosition(screenPos);
+        //             window.draw(voidTile);
+        //         }
+        //     }
+        // }
+        for (int y = 0; y < MAP_HEIGHT; y++) {
+            for (int x = 0; x < MAP_WIDTH; x++) {
+                sf::Vector2f pos(offsetX + x * TILE_SIZE, offsetY + y * TILE_SIZE);
+
+                // int tileType = mapData[y][x];
+                // if (tileType == 1) {
+                //     wallTile.setPosition(screenPos);
+                //     window.draw(wallTile);
+                // } else {
+                //     floorTile.setPosition(screenPos);
+                //     window.draw(floorTile);
+                // }
+                 switch (mapData[y][x]) {
+            case GRASS:
+                grassTile.setPosition(pos);
+                window.draw(grassTile);
+                break;
+            case ROAD:
+                roadTile.setPosition(pos);
+                window.draw(roadTile);
+                break;
+            case SIDEWALK:
+                sidewalkTile.setPosition(pos);
+                window.draw(sidewalkTile);
+                break;
+            case WALL:
+                wallTile.setPosition(pos);
+                window.draw(wallTile);
+                break;
+            case DOOR:
+                doorTile.setPosition(pos);
+                window.draw(doorTile);
+                break;
+            case WINDOW:
+                windowTile.setPosition(pos);
+                window.draw(windowTile);
+                break;
+            case ROOF:
+                roofTile.setPosition(pos);
+                window.draw(roofTile);
+                break;
+            default:
+                voidTile.setPosition(pos);
+                window.draw(voidTile);
+                break;
+        }
+            }
+        }
+
+        player.setPosition(
+            offsetX + playerPos.x * TILE_SIZE,
+            offsetY + playerPos.y * TILE_SIZE
+        );
+
+        // Draw the player
+        window.draw(player);
+
+        window.display();
+        sf::sleep(sf::milliseconds(100)); // crude movement limiter
+    }
+
+    return 0;
+}
