@@ -45,6 +45,8 @@ void Game::handleEvents() {
 
 void Game::update() {
     // Update game objects here
+    cnt++;
+    printf("Count: %d\n", cnt);
 }
 
 void Game::render() {
