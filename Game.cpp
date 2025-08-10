@@ -2,6 +2,9 @@
 
 // Game::Game() : window(nullptr), renderer(nullptr), isRunning(false) {}
 
+SDL_Texture* playerTex;
+SDL_Rect srcR, destR;
+
 Game::Game() {}
 Game::~Game() {}
 
@@ -29,6 +32,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     } else {
         isRunning = false;
     }
+
+    SDL_Surface* tmpSurface = IMG_Load("/home/rjm/projects/topdog/assets/player.png");
+    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+    SDL_FreeSurface(tmpSurface);
 }
 
 void Game::handleEvents() {
@@ -46,12 +53,21 @@ void Game::handleEvents() {
 void Game::update() {
     // Update game objects here
     cnt++;
+
+    destR.h = 64;
+    destR.w = 64;
+    destR.x = cnt;
+
     printf("Count: %d\n", cnt);
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
+
     // Render game objects here
+    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+
+
     SDL_RenderPresent(renderer);
 }
 

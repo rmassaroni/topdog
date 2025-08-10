@@ -1,8 +1,11 @@
+#pragma once //?
 
 #ifndef Game_hpp
 #define Game_hpp
 
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include <iostream>
 #include <stdio.h>
 
 class Game {
