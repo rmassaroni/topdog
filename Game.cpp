@@ -1,8 +1,12 @@
 #include "Game.hpp" //will change to .h
 #include "TextureManager.h"
+#include "GameObject.h"
 
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
+// SDL_Texture* playerTex;
+// SDL_Rect srcR, destR;
+
+GameObject* player;
+GameObject* enemy;
 
 Game::Game() {}
 Game::~Game() {}
@@ -36,7 +40,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     // playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
     // SDL_FreeSurface(tmpSurface);
 
-    playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
+    // playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
+    player = new GameObject("assets/player.png", renderer, 0, 0);
+    enemy = new GameObject("assets/enemy.png", renderer, 50, 50);
 }
 
 void Game::handleEvents() {
@@ -53,20 +59,25 @@ void Game::handleEvents() {
 
 void Game::update() {
     // Update game objects here
-    cnt++;
+    // cnt++;
+    //
+    // destR.h = 64;
+    // destR.w = 64;
+    // destR.x = cnt;
+    //
+    // printf("Count: %d\n", cnt);
 
-    destR.h = 64;
-    destR.w = 64;
-    destR.x = cnt;
-
-    printf("Count: %d\n", cnt);
+    player->Update();
+    enemy->Update();
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
 
     // Render game objects here
-    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+    // SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+    player->Render();
+    enemy->Render();
 
 
     SDL_RenderPresent(renderer);
