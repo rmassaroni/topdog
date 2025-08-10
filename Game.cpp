@@ -1,6 +1,5 @@
-#include "Game.hpp"
-
-// Game::Game() : window(nullptr), renderer(nullptr), isRunning(false) {}
+#include "Game.hpp" //will change to .h
+#include "TextureManager.h"
 
 SDL_Texture* playerTex;
 SDL_Rect srcR, destR;
@@ -33,9 +32,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    SDL_Surface* tmpSurface = IMG_Load("/home/rjm/projects/topdog/assets/player.png");
-    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-    SDL_FreeSurface(tmpSurface);
+    // SDL_Surface* tmpSurface = IMG_Load("/home/rjm/projects/topdog/assets/player.png");
+    // playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+    // SDL_FreeSurface(tmpSurface);
+
+    playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
 }
 
 void Game::handleEvents() {
