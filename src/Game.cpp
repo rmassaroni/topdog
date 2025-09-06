@@ -1,22 +1,24 @@
 #include "Game.hpp" //will change to .h
-// #include "TextureManager.h"
-#include "GameObject.h"
+#include "TextureManager.h"
+// #include "GameObject.h"
 #include "Map.h"
-#include "ECS.h"
-#include "Components.h"
+#include "ECS/Components.h"
+// #include "ECS.h"
+// #include "Components.h"
 
 // SDL_Texture* playerTex;
 // SDL_Rect srcR, destR;
 
-GameObject* player;
-GameObject* enemy;
+// GameObject* player;
+// GameObject* enemy;
 Map* map;
-
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-Manager manager;
-auto& newPlayer(manager.addEntity());
+
+// auto& newPlayer(manager.addEntity());
+auto& player(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -51,12 +53,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     // SDL_FreeSurface(tmpSurface);
 
     // playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
-    player = new GameObject("assets/player.png", 0, 0);
-    enemy = new GameObject("assets/enemy.png", 50, 50);
+    // player = new GameObject("assets/player.png", 0, 0);
+    // enemy = new GameObject("assets/enemy.png", 50, 50);
     map = new Map();
 
-    newPlayer.addComponent<PositionComponent>();
-    newPlayer.getComponent<PositionComponent>().setPos(500, 500);
+    // newPlayer.addComponent<PositionComponent>();
+    // newPlayer.getComponent<PositionComponent>().setPos(500, 500);
+
+    player.addComponent<PositionComponent>(100, 400);
+    player.addComponent<SpriteComponent>("assets/player.png");
 }
 
 void Game::handleEvents() {
@@ -81,23 +86,30 @@ void Game::update() {
     //
     // printf("Count: %d\n", cnt);
 
-    player->Update();
-    enemy->Update();
+    // player->Update();
+    // enemy->Update();
+    // manager.update();
+    // std::cout << newPlayer.getComponent<PositionComponent>().x() << "," << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+    manager.refresh();
     manager.update();
-    std::cout << newPlayer.getComponent<PositionComponent>().x() << "," << newPlayer.getComponent<PositionComponent>().y() << std::endl;
+    if (player.getComponent<PositionComponent>().x() > 100) {
+        // player.getComponent<PositionComponent>().setPos(0, 400);
+        player.getComponent<SpriteComponent>().setTex("assets/enemy.png");
+    }
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
 
     map->DrawMap();
+    // manager.render();
 
     // Render game objects here
     // SDL_RenderCopy(renderer, playerTex, NULL, &destR);
-    player->Render();
-    enemy->Render();
+    // player->Render();
+    // enemy->Render();
 
-
+    manager.draw();
     SDL_RenderPresent(renderer);
 }
 
